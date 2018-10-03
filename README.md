@@ -1,3 +1,9 @@
+---
+description: Google Cloud Hakathon 2018
+---
+
+# Kubernetes로 칠냥이 도커 컨테이너에서 키우기
+
 ## 오마쥬 크림 히어로즈
 이 프로젝트는 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 구글 클라우드 챌린지를 만들어보았습니다.
 
@@ -195,3 +201,5 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 ![./image/lala-docker-kube.png](./image/lala-docker-kube.png)
 
  [https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](./lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
+
+
