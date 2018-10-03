@@ -17,10 +17,6 @@ kitten bot에 고양이의 특징을 반영하기 위해 먼저 냥이들의 특
 * hi 라고 인사하면 모든 고양이가 meow라고 인사해줍니다.
 * dd 라고 부르면 고양이 디디가 자기 이름인 것을 알아듣고 meow라고 인사해줍니다.
 * tt 라고 부르면 티티가 달려와서 meow라고 인사해줍니다.
-* 고양이들은 아침 8시에 일어나서 12시에 잡니다.
-* 디디는 모닝콜을 해 줍니다.
-
-![https://storage.googleapis.com/cream-heros/dd-morningcall.png](https://storage.googleapis.com/cream-heros/dd-morningcall.png)
 
 ## 클라우드 챌린지
 
