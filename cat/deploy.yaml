@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kitten
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kitten
+    spec:
+      containers:
+      - name: master
+        image: gcr.io/PROJECT/kitten:v1
+        volumeMounts:
+        - name: secret-token
+          mountPath: /etc/secret-token
+        env:
+        - name: KITTEN_TOKEN_PATH
+          value: /etc/secret-token/kitten-token
+      volumes:
+      - name: secret-token
+        secret:
+          secretName: kitten-token
