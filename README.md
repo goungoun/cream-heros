@@ -77,7 +77,7 @@ $ docker rmi ${IMAGE_ID} # 잘못 만들어서 이미지 삭제가 필요할 때
 도커 이미지를 push 해 준 다음에는 Container Registry 메뉴에서 확인할 수 있습니다.
 
 ## 도커 실행 테스트
-도커 이미지에는 토큰 파일이 들어있지 않기 때문에 현재 디렉토리에 있는 토큰 파일을 도커와 volume과 연결시켜주어야 합니다. 현재 디렉토리의 dd.token를 도커가 읽어갈 수 있도록 volume을 매핑해주고 도커 내 환경변수에 토큰 파일을 설정하여줍니다.
+도커 이미지에는 토큰 파일이 들어있지 않기 때문에 현재 디렉토리에 있는 토큰 파일을 도커와 volume과 연결시켜주어야 합니다. 현재 디렉토리의 dd-token를 도커가 읽어갈 수 있도록 volume을 매핑해주고 도커 내 환경변수에 토큰 파일을 설정하여줍니다.
 ~~~bash
 $ docker run -d \
    -v $(pwd)/secret/:/secret \
@@ -175,7 +175,7 @@ $ kubectl create -f ./tt/deploy.yaml --record
 ~~~
 
 ## 아니, 디디가 한국어를 알아들어?
-디디가 한국어를 알아들을 수 있게 [./dd/kitten.js](kitten.js)를 살짝 수정해봅니다.
+디디가 한국어를 알아들을 수 있게 [./dd/kittenbot.js](kittenbot.js)를 살짝 수정해봅니다.
 ~~~bash
 controller.hears(
   ['hello', 'hi', 'dd', '안녕'], ['direct_message', 'direct_mention', 'mention'],
@@ -194,4 +194,4 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 
 ![./image/lala-docker-kube.png](./image/lala-docker-kube.png)
 
- [https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kitten.js](./lala/kitten.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
+ [https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](./lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
