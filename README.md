@@ -52,8 +52,8 @@ $ npm install --save botkit
 ~~~
 
 ## 버켓에 고양이 사진 올리기
-Storage > bucket을 생성하여 고양이 사진을 올려줍니다. 이 사진은 채팅창에 '사진' 이라고 입력하면 사진을 보여주는 용도로 사용할 것입니다.
-![./image/lala-show-image.png](./image/lala-show-image.png)
+Storage > bucket을 생성하여 고양이 사진을 올려줍니다. 이 사진은 채팅창에 '사진' 이라고 입력하면 사진을 보여주는 용도로 사용할 것입니다.<br>
+![./image/lala-show-image.png](./image/lala-show-image.png)<br>
 올린 사진을 외부에 오픈하기 위해서는 권한 수정에서 allUsers 그룹을 만들어서 읽기 권한을 줍니다.
 ~~~
 Entity: Group
@@ -81,8 +81,8 @@ $ docker rmi ${IMAGE_ID} # 잘못 만들어서 이미지 삭제가 필요할 때
 ~~~bash
 $ docker run -d \
    -v $(pwd)/secret/:/secret \
-   -e MOMO_TOKEN_PATH=/secret/momo-token \
-   gcr.io/cream-heros/momo:v1
+   -e DD_TOKEN_PATH=/secret/dd-token \
+   gcr.io/cream-heros/dd:v1
 $ docker ps
 $ docker stop ${CONTAINER ID}
 ~~~
@@ -195,4 +195,3 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 ![./image/lala-docker-kube.png](./image/lala-docker-kube.png)
 
  [https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kitten.js](./lala/kitten.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
-
