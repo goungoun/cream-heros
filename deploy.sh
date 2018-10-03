@@ -6,5 +6,6 @@ for cat in ${cats};do
   if [[ ${running} -gt 0 ]];then
     kubectl delete -f "./${cat}/deploy.yaml"
   fi
+  sleep 5
   kubectl create -f "./${cat}/deploy.yaml"
 done

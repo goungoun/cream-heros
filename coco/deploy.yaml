@@ -14,6 +14,7 @@ spec:
       containers:
       - name: master
         image: gcr.io/cream-heros/coco:v1
+        imagePullPolicy: Always
         volumeMounts:
         - name: secret-token
           mountPath: /etc/secret-token

@@ -41,4 +41,12 @@ fs.readFile(process.env.LULU_TOKEN_PATH, function (err, data) {
 
 controller.hears(
   ['hello', 'hi','lulu'], ['direct_message', 'direct_mention', 'mention'],
-  function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
+  function (bot, message) { bot.reply(message, 'Meow. 안녕? 난 해적이야. 루루라고 해 :smile_cat:') })
+  
+controller.hears(
+  ['kubernetes','kube','쿠베','쿠버네티스'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, 'Terry Cho 동영상은 내가 가져간다~ 데헷 =3 =3 https://www.youtube.com/watch?v=rdyUAduXi48&feature=youtu.be') })
+
+
+
+
