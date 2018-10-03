@@ -40,7 +40,7 @@ fs.readFile(process.env.LALA_TOKEN_PATH, function (err, data) {
 })
 
 controller.hears(
-  ['hello', 'hi', 'lala', '라라', '안녕'], ['direct_message', 'direct_mention', 'mention'],
+  ['hello', 'hi', 'lala', '라라', '안녕','안냥'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) {
     bot.reply(message, 'meow. 왔냥 :smile_cat:')
   })
