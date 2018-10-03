@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dd
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: dd
+    spec:
+      containers:
+      - name: master
+        image: gcr.io/cream-heros/dd:v1_1
+        volumeMounts:
+        - name: secret-token
+          mountPath: /etc/secret-token
+        env:
+        - name: DD_TOKEN_PATH
+          value: /etc/secret-token/dd-token
+      volumes:
+      - name: secret-token
+        secret:
+          secretName: dd-token

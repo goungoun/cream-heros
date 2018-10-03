@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: lala
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: lala
+    spec:
+      containers:
+      - name: master
+        image: gcr.io/cream-heros/lala:v1
+        volumeMounts:
+        - name: secret-token
+          mountPath: /etc/secret-token
+        env:
+        - name: LALA_TOKEN_PATH
+          value: /etc/secret-token/lala-token
+      volumes:
+      - name: secret-token
+        secret:
+          secretName: lala-token
