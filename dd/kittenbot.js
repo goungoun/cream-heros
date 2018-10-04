@@ -48,7 +48,7 @@ controller.hears(
 controller.hears('사진', 'direct_mention,direct_message',
   function(bot, message) {
   bot.startConversation(message, function(err, convo) {
-    convo.say('https://storage.googleapis.com/cream-heros/dd-fat.png');
+    convo.say('https://storage.googleapis.com/cream-heros/dd-huh.PNG');
     convo.next();
     })
   })
