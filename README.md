@@ -264,38 +264,6 @@ $ docker build -t gcr.io/cream-heros/dd:v1_1 .
 $ docker images
 $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 ```
-
-## 라라는 똑똑하니까
-
-라라는 칠냥이 중에서 제일 똑똑합니다. 크림 히어로즈 [누가 제일 똑똑할까? 고양이 IQ 테스트편 ](https://www.youtube.com/watch?v=jp9liXE_1wc)에서 검증되었지요. 제가 도커나 쿠버네티스 커맨드를 아직 다 못 외워서 맨날 찾아보는데 제 선생님으로 모실까 해요.
-
-![./image/lala-docker-kube.png](./image/lala-docker-kube.png)
-
-[https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
-
-## 모모는 따라쟁이
-![./image/momo-repeat.png](./image/momo-repeat.png)
-
-## 로그 확인하기
-집사가 디디에게 너무 많은 것을 요구하려 했나 봅니다. 재 배포를 하고나서 디디가 아무리 불러도 오지 않아서 원인이 무엇인지를 살펴보았습니다. 
-
-~~~bash
-$ kubectl get pods
-NAME                      READY     STATUS             RESTARTS   AGE
-chuchu-847c58df5c-bsm4j   1/1       Running            0          11h
-coco-6586fd94d9-v94r2     1/1       Running            0          11h
-dd-5cb6cf6f49-4dd66       0/1       CrashLoopBackOff   5          5m
-lala-7bc6d65c79-dx2zg     1/1       Running            0          11h
-lulu-5b746f57bc-hp2n7     1/1       Running            0          11h
-momo-6bc44d84b9-l6px6     1/1       Running            0          11h
-tt-7566595f89-fxxwx       1/1       Running            0          11h
-
-$ kubectl logs dd-5cb6cf6f49-4dd66
-Initializing Botkit v0.6.16
-info: ** No persistent storage method specified! Data may be lost when process shuts down.
-Error: Specify $DD_TOKEN in environment
-~~~
-
 ## 컨테이너가 좁은 것 같아요
 
 앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다. 디디는 크건 작건 컨테이너처럼 보이는 것이있으면 모든 컨테이너에 머리를 들이밀고 들어가 보려고 하지요.<br>
@@ -329,6 +297,42 @@ tt        1         1         1            1           10h
 그런데 replica를 2로 하니 디디가 두개가 생겨버렸습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. 
 ![./image/replica-2.png](./image/replica-2.png)
 
+## 라라는 똑똑하니까
+
+라라는 칠냥이 중에서 제일 똑똑합니다. 크림 히어로즈 [누가 제일 똑똑할까? 고양이 IQ 테스트편 ](https://www.youtube.com/watch?v=jp9liXE_1wc)에서 검증되었지요. 제가 도커나 쿠버네티스 커맨드를 아직 다 못 외워서 맨날 찾아보는데 제 선생님으로 모실까 해요.
+
+![./image/lala-docker-kube.png](./image/lala-docker-kube.png)
+
+[https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
+
+## 로그 확인하기
+집사가 라라에게 너무 많은 것을 요구하려 했나 봅니다. 재 배포를 하고나서 라라를 아무리 불러도 오지 않아서 원인이 무엇인지를 살펴보았습니다. 
+
+~~~bash
+$ kubectl get pods
+NAME                      READY     STATUS             RESTARTS   AGE
+chuchu-847c58df5c-bsm4j   1/1       Running            0          11h
+coco-6586fd94d9-v94r2     1/1       Running            0          11h
+lala-7bc6d65c79-dx2zg     0/1       CrashLoopBackOff   5          5m
+dd-5cb6cf6f49-4dd66       1/1       Running            0          11h
+lulu-5b746f57bc-hp2n7     1/1       Running            0          11h
+momo-6bc44d84b9-l6px6     1/1       Running            0          11h
+tt-7566595f89-fxxwx       1/1       Running            0          11h
+
+$ kubectl logs lala-7bc6d65c79-dx2zg
+Initializing Botkit v0.6.16
+info: ** No persistent storage method specified! Data may be lost when process shuts down.
+Error: Specify $LALA_TOKEN in environment
+~~~
+
+## 모모는 따라쟁이
+![./image/momo-repeat.png](./image/momo-repeat.png)
+
+
+## 배포하는 방법 3가지
+- rollout
+- canary
+- blue-green
 
 ## 정리
 
