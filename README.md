@@ -266,9 +266,12 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 
 라라는 칠냥이 중에서 제일 똑똑합니다. 크림 히어로즈 [누가 제일 똑똑할까? 고양이 IQ 테스트편 ](https://www.youtube.com/watch?v=jp9liXE_1wc)에서 검증되었지요. 제가 도커나 쿠버네티스 커맨드를 아직 다 못 외워서 맨날 찾아보는데 제 선생님으로 모실까 해요.
 
-![./image/lala-docker-kube.png](.gitbook/assets/lala-docker-kube%20%281%29.png)
+![./image/lala-docker-kube.png](./image/lala-docker-kube.png)
 
 [https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
+
+## 모모는 따라쟁이
+![./image/momo-repeat.png](./image/momo-repeat.png)
 
 ## 문제가 생겼어요
 집사가 디디에게 너무 많은 것을 요구하려 했나 봅니다. POD를 보면 dd에 문제가 있는데 logs 명령어로 원인이 무엇인지를 살펴봅니다. 
