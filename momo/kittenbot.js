@@ -42,3 +42,13 @@ fs.readFile(process.env.MOMO_TOKEN_PATH, function (err, data) {
 controller.hears(
   ['hello', 'hi','momo'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
+
+controller.hears('모모','direct_mention,direct_message', function(bot, message) {
+  bot.startConversation(message, function(err, convo) {
+    convo.ask('', function(answer, convo) {
+      var your_answer = answer.text;
+      convo.say(answer.text);
+      convo.next(); // continue with conversation
+    })
+  })
+})
