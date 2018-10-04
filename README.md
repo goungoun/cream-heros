@@ -231,3 +231,41 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 
 [https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
 
+## POD에 문제가 생기면
+[조대협님의 블로그](http://bcho.tistory.com/1261)에 소개된 RC 기능 테스트도 해 보기로 합니다. 이 기능은 POC의 상태를 체크하고 있다가 문제가 있으면 자동으로 재구동해주는 기능이라고 하는데 pod를 강제로 삭제해주면 다시 pod가 올라오는 것을 볼 수 있습니다. 그런데 종료가 마무리되지 않은 상태에서 바로 재구동해주는 약간의 텀 동안 디디에게 말을 걸어보니 순간적으로 디디가 둘이 되어 두 번 응답을 해 주는 문제가 있네요.
+~~~bash
+$ kubectl delete pod --all
+pod "chuchu-847c58df5c-klfnd" deleted
+pod "coco-6586fd94d9-hp4dz" deleted
+pod "dd-759b4499b9-gjqch" deleted
+pod "lala-7bc6d65c79-sxltc" deleted
+pod "lulu-5b746f57bc-tgh64" deleted
+pod "momo-6bc44d84b9-7l2wr" deleted
+pod "tt-7566595f89-pr595" deleted
+$ kubectl get pods
+NAME                      READY     STATUS              RESTARTS   AGE
+chuchu-847c58df5c-bsm4j   1/1       Running             0          13s
+chuchu-847c58df5c-klfnd   1/1       Terminating         0          2d
+coco-6586fd94d9-hp4dz     1/1       Terminating         0          2d
+coco-6586fd94d9-v94r2     1/1       Running             0          12s
+dd-759b4499b9-gjqch       1/1       Terminating         0          1d
+dd-759b4499b9-rz4gb       1/1       Running             0          12s
+lala-7bc6d65c79-dx2zg     0/1       ContainerCreating   0          12s
+lala-7bc6d65c79-sxltc     1/1       Terminating         0          9h
+lulu-5b746f57bc-hp2n7     1/1       Running             0          11s
+lulu-5b746f57bc-tgh64     1/1       Terminating         0          8h
+momo-6bc44d84b9-7l2wr     1/1       Terminating         0          10h
+momo-6bc44d84b9-l6px6     1/1       Running             0          11s
+tt-7566595f89-fxxwx       0/1       Pending             0          10s
+tt-7566595f89-pr595       1/1       Terminating         0          10h
+$ kubectl get pods
+NAME                      READY     STATUS    RESTARTS   AGE
+chuchu-847c58df5c-bsm4j   1/1       Running   0          1m
+coco-6586fd94d9-v94r2     1/1       Running   0          1m
+dd-759b4499b9-rz4gb       1/1       Running   0          1m
+lala-7bc6d65c79-dx2zg     1/1       Running   0          1m
+lulu-5b746f57bc-hp2n7     1/1       Running   0          1m
+momo-6bc44d84b9-l6px6     1/1       Running   0          1m
+tt-7566595f89-fxxwx       1/1       Running   0          1m
+~~~
+
