@@ -320,3 +320,5 @@ momo      1         1         1            1           10h
 tt        1         1         1            1           10h
 ~~~
 
+그런데 replica를 2로 하니 디디가 두개가 생겨버렸습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. 
+![./image/replica-2.png](./image/replica-2.png)
