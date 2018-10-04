@@ -206,8 +206,9 @@ $ kubectl delete deployment dd //yaml 파일이 없을 때 <resource> <name>
   $ kubectl create -f ./tt/deploy.yaml --record
   ```
 
-## POD에 문제가 생기면 어쩌죠?
-[조대협님의 블로그](http://bcho.tistory.com/1261)에 소개된 Replication Controller 기능을 테스트 해 보기로 합니다. 이 기능은 POD의 상태를 체크하고 있다가 문제가 있으면 자동으로 재구동해주는 기능이라고 합니다. pod를 강제로 삭제해주면 다시 pod가 올라오는 것을 볼 수 있습니다. 그런데 종료가 마무리 되지 않은 상태에서 바로 재구동해주는 약간의 텀 동안 디디에게 말을 걸어보니 순간적으로 디디가 둘이 되어 두 번 응답을 해 주는 문제가 있네요.
+## POD는 안전한가요?
+혹시라도 냥이가 다칠까봐 [조대협님의 블로그](http://bcho.tistory.com/1261)에 소개된 리플리케이션 컨트롤러 기능을 테스트 해 보기로 합니다. 이 기능은 POD의 상태를 체크하고 있다가 이상이 있으면 자동으로 재구동해주는 기능이라고 합니다. POD를 강제로 삭제해주면 다시 POD가 올라오는 것을 볼 수 있습니다. 
+
 ~~~bash
 $ kubectl delete pod --all
 pod "chuchu-847c58df5c-klfnd" deleted
@@ -244,6 +245,8 @@ momo-6bc44d84b9-l6px6     1/1       Running   0          1m
 tt-7566595f89-fxxwx       1/1       Running   0          1m
 ~~~
 
+그런데 종료가 마무리 되지 않은 상태에서 바로 재구동해주는 약간의 텀 동안 디디에게 말을 걸어보니 순간적으로 디디가 둘이 되어 두 번 응답을 해 주는 부분은 좀 고민을 해 봐야겠어요.
+
 ## 아니, 디디가 한국어를 알아들어?
 
 디디가 한국어를 알아들을 수 있게 [./dd/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/kittenbot.js)를 살짝 수정해봅니다.
@@ -273,8 +276,8 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 ## 모모는 따라쟁이
 ![./image/momo-repeat.png](./image/momo-repeat.png)
 
-## 문제가 생겼어요
-집사가 디디에게 너무 많은 것을 요구하려 했나 봅니다. POD를 보면 dd에 문제가 있는데 logs 명령어로 원인이 무엇인지를 살펴봅니다. 
+## 로그 확인하기
+집사가 디디에게 너무 많은 것을 요구하려 했나 봅니다. 재 배포를 하고나서 디디가 아무리 불러도 오지 않아서 원인이 무엇인지를 살펴보았습니다. 
 
 ~~~bash
 $ kubectl get pods
