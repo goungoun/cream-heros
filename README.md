@@ -273,10 +273,10 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 
 ## 컨테이너가 쫌 좁은 것 같아요
 
-털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 
+앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다.<br>
 ![./image/dd-fat.png](./image/dd-fat.png)
 
-그래서 클러스터 repliica 수를 조정해주기로 하였습니다.
+미안해 디디. 몸집이 큰 디디를 위해 클러스터 repliica 수를 조정해주었습니다.
 ~~~bash
 $ kubectl get deploy
 NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
