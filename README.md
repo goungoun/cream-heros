@@ -101,7 +101,7 @@ $ docker ps
 $ docker stop ${CONTAINER ID}
 ```
 
-## TOKEN
+## 슬랙 토큰
 
 Kubernetes &gt; 구성 메뉴로 들어가면 비밀번호, 키, 토큰과 같은 민감한 정보를 저장할 수 있는 공간이 있습니다. 슬랙 토큰은 소스코드에 기록하게되면 유출의 염려가 있기 때문에 별도의 파일에 기록한 다음 쿠버네티스 클러스터에 적용해줍니다. 토큰의 이름은 \_를 사용할 수 없는 것에 유의해주세요.
 
@@ -189,7 +189,7 @@ $ kubectl delete deployment dd //yaml 파일이 없을 때 <resource> <name>
 
 쿠버네티스의 POD는 어드민과 네트워킹을 하기 위해 묶어놓은 그룹입니다. 하나 또는 여러개의 컨테이너를 포함할 수 있고 kubectl run 커맨드로 pod를 만들 수 있습니다.
 
-* 하나의 컨테이너로 POD 만들기 - 털 뚠뚠이 디디가 컨테이너에? 심쿵!!
+* 하나의 컨테이너로 POD 만들기 - 털 뚠뚠이 디디가 컨테이너에?
 
   ![https://storage.googleapis.com/cream-heros/dd\_one\_container.png](https://storage.googleapis.com/cream-heros/dd_one_container.png)
 
@@ -273,7 +273,10 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 
 ## 컨테이너가 쫌 좁은 것 같아요
 
-털뚠뚠이 디디는 컨테이너가 좀 좁습니다. 그래서 클러스터 repliica 수를 조정해보기로 합니다.
+털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 
+![./image/dd-fat.png](./image/dd-fat.png)
+
+그래서 클러스터 repliica 수를 조정해주기로 하였습니다.
 ~~~bash
 $ kubectl get deploy
 NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
