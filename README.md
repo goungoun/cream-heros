@@ -232,7 +232,7 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 [https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
 
 ## POD에 문제가 생기면
-[조대협님의 블로그](http://bcho.tistory.com/1261)에 소개된 RC 기능 테스트도 해 보기로 합니다. 이 기능은 POC의 상태를 체크하고 있다가 문제가 있으면 자동으로 재구동해주는 기능이라고 하는데 pod를 강제로 삭제해주면 다시 pod가 올라오는 것을 볼 수 있습니다. 그런데 종료가 마무리되지 않은 상태에서 바로 재구동해주는 약간의 텀 동안 디디에게 말을 걸어보니 순간적으로 디디가 둘이 되어 두 번 응답을 해 주는 문제가 있네요.
+[조대협님의 블로그](http://bcho.tistory.com/1261)에 소개된 RC 기능 테스트도 해 보기로 합니다. 이 기능은 POD의 상태를 체크하고 있다가 문제가 있으면 자동으로 재구동해주는 기능이라고 하는데 pod를 강제로 삭제해주면 다시 pod가 올라오는 것을 볼 수 있습니다. 그런데 종료가 마무리되지 않은 상태에서 바로 재구동해주는 약간의 텀 동안 디디에게 말을 걸어보니 순간적으로 디디가 둘이 되어 두 번 응답을 해 주는 문제가 있네요.
 ~~~bash
 $ kubectl delete pod --all
 pod "chuchu-847c58df5c-klfnd" deleted
