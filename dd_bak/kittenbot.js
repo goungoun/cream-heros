@@ -19,7 +19,7 @@ var fs = require('fs')
 var controller = Botkit.slackbot({debug: false})
 
 if (!process.env.DD_TOKEN_PATH) {
-  console.log('Error: Specify DD_TOKEN_PATH nenvironment')
+  console.log('Error: Specify DD_TOKEN_PATH environment')
   process.exit(1)
 }
 
@@ -40,9 +40,9 @@ fs.readFile(process.env.DD_TOKEN_PATH, function (err, data) {
 })
 
 controller.hears(
-  ['hello', 'hi', 'dd', '안녕','디디'], ['direct_message', 'direct_mention', 'mention'],
+  ['hello', 'hi', 'dd', '안녕'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) {
-    bot.reply(message, 'Meow. :smile_cat:')
+    bot.reply(message, 'Meow. :smile_cat:') 
   })
 
 controller.hears('사진', 'direct_mention,direct_message',
