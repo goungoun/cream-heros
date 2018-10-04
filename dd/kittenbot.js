@@ -41,11 +41,12 @@ fs.readFile(process.env.DD_TOKEN_PATH, function (err, data) {
 
 controller.hears(
   ['hello', 'hi', 'dd', '안녕'], ['direct_message', 'direct_mention', 'mention'],
-  function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
+  function (bot, message) { 
+      bot.reply(message, 'Meow. :smile_cat:') 
+  })
 
-controller.hears(['photo','사진'],'direct_mention,direct_message', function(bot, message) {
-  bot.startConversation(message, function(err, convo) {
-    convo.say('https://storage.googleapis.com/cream-heros/dd-fat.png');
-    convo.next(); // continue with conversation
-    })
+controller.hears(
+  ['photo','사진'], ['direct_mention', 'direct_message'], 
+  function(bot, message) {
+    bot.reply(message, 'https://storage.googleapis.com/cream-heros/dd-fat.png')
   })
