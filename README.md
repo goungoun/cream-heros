@@ -290,12 +290,12 @@ info: ** No persistent storage method specified! Data may be lost when process s
 Error: Specify $DD_TOKEN in environment
 ~~~
 
-## 컨테이너가 쫌 좁은 것 같아요
+## 컨테이너가 좁은 것 같아요
 
-앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다.<br>
+앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다. 디디는 크건 작건 컨테이너처럼 보이는 것이있으면 모든 컨테이너에 머리를 들이밀고 들어가 보려고 하지요.<br>
 ![./image/dd-fat.png](./image/dd-fat.png)
 
-미안해 디디. 몸집이 큰 디디를 위해 클러스터 repliica 수를 조정해주었습니다.
+몸집이 큰 디디를 위해 클러스터 repliica 수를 조정해주었습니다.
 ~~~bash
 $ kubectl get deploy
 NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
