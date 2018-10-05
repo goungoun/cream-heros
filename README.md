@@ -43,6 +43,10 @@ $ DD_TOKEN_PATH=./secret/dd-token node ./dd/dd.js # 테스트용
 ```
 
 ## 코드 준비
+이 프로젝트의 주요 스크립트는 3가지 입니다.
+- [copycat.sh](copycat.sh) 1냥이를 7냥이로 만들어주는 스크립트입니다. <br>
+- [docker.sh](docker.sh) 냥이를 도커 컨테이너에 태우기 위해 꼭 필요한 도커 명령어 모음 입니다. <br>
+- [kubectl.sh](kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. <br>
 
 구글 클라우드에서 project를 생성하고 cloud console에서 [copycat.sh](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/copycat.sh)을 실행하여 칠냥이와 관련한 모든 파일을 만들어줍니다. 저는 cream-heros 프로젝트에서 실행하였지만 직접 실습해보시는 경우는 해당 project\_id로 인식해주는 작업이 필요하기 때문에 반드시 한번은 스크립트를 돌려서 각 설정들을 맞춰줘야 합니다.
 
