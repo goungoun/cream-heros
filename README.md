@@ -269,7 +269,7 @@ $ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
 앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다. 디디는 크건 작건 컨테이너처럼 보이는 것이있으면 모든 컨테이너에 머리를 들이밀고 들어가 보려고 하지요.<br>
 ![./image/dd-fat.png](./image/dd-fat.png)
 
-몸집이 큰 디디를 위해 클러스터 repliica 수를 조정해주었습니다.
+몸집이 큰 디디를 위해 클러스터 replica를 2개로 늘려주었습니다.
 ~~~bash
 $ kubectl get deploy
 NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
@@ -294,7 +294,7 @@ momo      1         1         1            1           10h
 tt        1         1         1            1           10h
 ~~~
 
-그런데 replica를 2로 하니 디디가 두개가 생겨버렸습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. 
+그런데 이렇게 하니까 디디가 두 마리로 복제되었습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. 
 ![./image/replica-2.png](./image/replica-2.png)
 
 ## 라라는 똑똑하니까
