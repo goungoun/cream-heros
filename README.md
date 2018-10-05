@@ -114,7 +114,7 @@ $ docker stop ${CONTAINER ID}
 
 ### 3단계: 쿠버네티스 배포
 
-[kubectl.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. 쿠버네티스 명령어가 익숙해진 다음에 간편하게 사용합니다.
+[kubectl.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. 쿠버네티스 명령어가 익숙해진 다음에 간편하게 사용할 생각으로 만들었습니다.
 
 ## 슬랙 토큰
 
