@@ -65,7 +65,7 @@ Access: Reader
 $ DD_TOKEN_PATH=./secret/dd-token node ./dd/dd.js
 ```
 
-칠냥이를 각각의 컨테이너에 태울 때도 쿠버네티스에 배포할 때도 칠냥이의 각 이름과 설정을 여기 저기 고쳐줘야 합니다. 코딩, 도커라이징, 쿠버네티스 클러스터 3단계에서 이 까다로운 챌린지를 쉬운 것처럼 느껴지게 할 어떤 도구의 필요성이 느껴지더군요. 그래서 배시 셸을 미리 준비하여보았습니다.
+칠냥이를 각각의 컨테이너에 태울 때도 쿠버네티스에 배포할 때도 칠냥이의 각 이름과 설정을 여기 저기 고쳐줘야 합니다. 코딩, 도커라이징, 쿠버네티스 클러스터 배포 3단계에서 이 까다로운 챌린지를 쉬운 것처럼 느껴지게 할 어떤 도구의 필요성이 느껴지더군요. 
 
 ### 1단계 : 코딩
 
@@ -101,7 +101,7 @@ $ docker push gcr.io/cream-heros/dd:v1
 $ docker rmi ${IMAGE_ID}
 ```
 
-gcr.io로 올리기 전에 테스트를 미리 해 보고 싶다면 현재 디렉토리에 있는 토큰 파일을 도커와 volume과 연결시켜주어야 합니다. 아래 명령어는 현재 디렉토리의 dd-token를 도커가 읽어갈 수 있도록 volume을 매핑해주고 도커 내 환경변수에 토큰 파일을 설정하여주는 예제입니다.
+도커 레지스트리에 올리기 전에 테스트를 미리 해 보고 싶다면 현재 디렉토리에 있는 토큰 파일을 도커와 volume과 연결시켜주어야 합니다. 아래 명령어는 현재 디렉토리의 dd-token를 도커가 읽어갈 수 있도록 volume을 매핑해주고 도커 내 환경변수에 토큰 파일을 설정하여주는 예제입니다.
 
 ```bash
 $ docker run -d \
@@ -112,9 +112,9 @@ $ docker ps
 $ docker stop ${CONTAINER ID}
 ```
 
-### 3단계: 쿠버네티스에 배포
+### 3단계: 쿠버네티스 배포
 
-[kubectl.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. 
+[kubectl.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. 쿠버네티스 명령어가 익숙해진 다음에 간편하게 사용합니다.
 
 ## 슬랙 토큰
 
@@ -193,7 +193,9 @@ $ kubectl logs ${POD_NAME} ${CONTAINER_NAME}
 $ kubectl create -f ./dd/deploy.yaml
 ```
 
-동일한 방법으로 tt, momo, lala, chuchu, lulu 도커 이미지도 배포해줍니다. ![./image/workloads.png](.gitbook/assets/workloads.png)
+동일한 tt, momo, lala, chuchu, lulu 도커 이미지도 배포해줍니다. ![./image/workloads.png](.gitbook/assets/workloads.png)
+
+혹시라도 배포가 잘못된 경우는 삭제하고 다시 생성해주면 되지요.
 
 ```bash
 $ kubectl delete -f ./dd/deploy.yaml //yaml 파일이 있을 때
@@ -204,21 +206,26 @@ $ kubectl delete deployment dd //yaml 파일이 없을 때 <resource> <name>
 
 쿠버네티스의 POD는 어드민과 네트워킹을 하기 위해 묶어놓은 그룹입니다. 하나 또는 여러개의 컨테이너를 포함할 수 있고 kubectl run 커맨드로 pod를 만들 수 있습니다.
 
-* 하나의 컨테이너로 POD 만들기 - 털 뚠뚠이 디디가 컨테이너에?
+* 털 뚠뚠이 디디가 하나의 컨테이너가 들어가있네요.
 
   ![https://storage.googleapis.com/cream-heros/dd\_one\_container.png](https://storage.googleapis.com/cream-heros/dd_one_container.png)
 
   ```bash
-  $ kubectl create -f ./dd/deploy.yaml --record
+  $ kubectl create -f ./dd/deploy.yaml
   ```
 
-* 여러개 컨테이너로 POD 만들기 - 일곱냥이 모두 컨테이너에 들어가는 것을 좋아합니다. [영상 보러가기 ♡♡](https://www.youtube.com/watch?v=bGvsqQW1XOw)
+* 1냥 1 POD - 일곱냥이 모두 컨테이너에 들어가는 것을 좋아합니다. [영상 보러가기 ♡♡](https://www.youtube.com/watch?v=bGvsqQW1XOw)
 
   ![https://storage.googleapis.com/cream-heros/container\_capsule.png](https://storage.googleapis.com/cream-heros/container_capsule.png)
 
   ```bash
-  $ gcloud docker -- push gcr.io/cream-heros/tt:v1
-  $ kubectl create -f ./tt/deploy.yaml --record
+  $ kubectl create -f ./dd/deploy.yaml
+  $ kubectl create -f ./tt/deploy.yaml
+  $ kubectl create -f ./momo/deploy.yaml
+  $ kubectl create -f ./lulu/deploy.yaml
+  $ kubectl create -f ./lala/deploy.yaml
+  $ kubectl create -f ./coco/deploy.yaml
+  $ kubectl create -f ./chuchu/deploy.yaml
   ```
 
 ## POD는 안전한가요?
