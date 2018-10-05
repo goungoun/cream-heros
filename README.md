@@ -86,8 +86,11 @@ Access: Reader
 ```bash
 $ docker build -t gcr.io/cream-heros/dd:v1 .
 $ docker images
-$ gcloud docker -- push gcr.io/cream-heros/dd:v1
-$ docker rmi ${IMAGE_ID} # 잘못 만들어서 이미지 삭제가 필요할 때
+$ docker push gcr.io/cream-heros/dd:v1
+
+이미지 삭제가 필요할 때는 docker rmi로 삭제할 수 있습니다.
+```
+$ docker rmi ${IMAGE_ID} 
 ```
 
 도커 이미지를 push 해 준 다음에는 Container Registry 메뉴에서 확인할 수 있습니다.
