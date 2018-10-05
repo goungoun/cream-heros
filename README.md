@@ -41,6 +41,21 @@ $ mkdir secret
 $ echo "[슬랙 토큰 문자열]" > dd-token
 ~~~
 
+## 버켓에 고양이 사진 올리기
+
+Storage &gt; bucket을 생성하여 고양이 사진을 올려줍니다. 이 사진은 채팅창에 '사진' 이라고 입력하면 사진을 보여주는 용도로 사용할 것입니다.  
+ ![./image/lala-show-image.png](.gitbook/assets/lala-show-image%20%281%29.png)  
+ 올린 사진을 외부에 오픈하기 위해서는 권한 수정에서 allUsers 그룹을 만들어서 읽기 권한을 줍니다.
+
+```text
+Entity: Group
+Name: allUsers
+Access: Reader
+```
+
+이 작업을 해 주어야 이렇게 외부에서 접근 가능한 짧은 URL이 제공됩니다. [https://storage.googleapis.com/cream-heros/container\_capsule.png](https://storage.googleapis.com/cream-heros/container_capsule.png)
+
+구글 클라우드에 처음 사진을 올리시는 분은 [Extract, Analyze, and Translate Text from Images with the Cloud ML APIs ](https://qwiklabs.com/focuses/1836?parent=catalog)에 Upload an image to a cloud storage bucket을 참고하시면 됩니다.
 
 ## 코드 준비
 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)은 매우 섬세한 예제를 담고 있습니다. 토큰을 소스코드에 넣지 않고 환경변수를 받아서 사용하고 있기 때문에 그냥 Copy & Paste하는 방법으로 칠냥이를 만들 수는 없습니다. node 명령어로 스크립트를 실행시킬 때는 이렇게 환경변수를 넘겨서 테스트를 해 주어야 합니다.
@@ -70,30 +85,7 @@ $ npm install --save botkit
 
 ### 2단계: 도커라이징
 [docker.sh](docker.sh) 냥이를 도커 컨테이너에 태우기 위해 꼭 필요한 도커 명령어 모음 입니다.  <br>
-
-### 3단계: 쿠버네티스에 배포
-[kubectl.sh](kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. <br>
-
-## 버켓에 고양이 사진 올리기
-
-Storage &gt; bucket을 생성하여 고양이 사진을 올려줍니다. 이 사진은 채팅창에 '사진' 이라고 입력하면 사진을 보여주는 용도로 사용할 것입니다.  
- ![./image/lala-show-image.png](.gitbook/assets/lala-show-image%20%281%29.png)  
- 올린 사진을 외부에 오픈하기 위해서는 권한 수정에서 allUsers 그룹을 만들어서 읽기 권한을 줍니다.
-
-```text
-Entity: Group
-Name: allUsers
-Access: Reader
-```
-
-이 작업을 해 주어야 이렇게 외부에서 접근 가능한 짧은 URL이 제공됩니다. [https://storage.googleapis.com/cream-heros/container\_capsule.png](https://storage.googleapis.com/cream-heros/container_capsule.png)
-
-구글 클라우드에 처음 사진을 올리시는 분은 [Extract, Analyze, and Translate Text from Images with the Cloud ML APIs ](https://qwiklabs.com/focuses/1836?parent=catalog)에 Upload an image to a cloud storage bucket을 참고하시면 됩니다.
-
-## 도커 빌드
-
-도커 이미지를 만들어서 gcr.io 구글 클라우드의 레지스트리로 push 해 줍니다. docker build 커맨드를 사용하여 디디의 도커 이미지를 만들어줍니다.
-
+docker build 커맨드를 사용하여 도커 이미지를 만들고 docker push로 gcr.io 구글 클라우드의 레지스트리로 push 해 줍니다. 
 ```bash
 $ docker build -t gcr.io/cream-heros/dd:v1 .
 $ docker images
@@ -105,11 +97,7 @@ $ docker push gcr.io/cream-heros/dd:v1
 $ docker rmi ${IMAGE_ID} 
 ```
 
-도커 이미지를 push 해 준 다음에는 Container Registry 메뉴에서 확인할 수 있습니다.
-
-## 도커 실행 테스트
-
-도커 이미지에는 토큰 파일이 들어있지 않기 때문에 현재 디렉토리에 있는 토큰 파일을 도커와 volume과 연결시켜주어야 합니다. 현재 디렉토리의 dd-token를 도커가 읽어갈 수 있도록 volume을 매핑해주고 도커 내 환경변수에 토큰 파일을 설정하여줍니다.
+도커 레지스트리로 올리기 전에 테스트를 미리 해 보고 싶다면 현재 디렉토리에 있는 토큰 파일을 도커와 volume과 연결시켜주어야 합니다. 현재 디렉토리의 dd-token를 도커가 읽어갈 수 있도록 volume을 매핑해주고 도커 내 환경변수에 토큰 파일을 설정하여줍니다.
 
 ```bash
 $ docker run -d \
@@ -120,8 +108,13 @@ $ docker ps
 $ docker stop ${CONTAINER ID}
 ```
 
-## 슬랙 토큰
+도커 이미지를 push 해 준 다음에는 Container Registry 메뉴에서 확인할 수 있습니다.
 
+### 3단계: 쿠버네티스에 배포
+[kubectl.sh](kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. <br> 
+
+
+## 슬랙 토큰
 Kubernetes &gt; 구성 메뉴로 들어가면 비밀번호, 키, 토큰과 같은 민감한 정보를 저장할 수 있는 공간이 있습니다. 슬랙 토큰은 소스코드에 기록하게되면 유출의 염려가 있기 때문에 별도의 파일에 기록한 다음 쿠버네티스 클러스터에 적용해줍니다. 토큰의 이름은 \_를 사용할 수 없는 것에 유의해주세요.
 
 ```bash
