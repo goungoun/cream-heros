@@ -6,9 +6,9 @@ description: Google Cloud Hakathon 2018
 
 ## 오마쥬 크림 히어로즈
 
-이 글에서 소개할 내용은 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 토이 프로젝트 입니다.
+여기서 소개할 내용은 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 토이 프로젝트 입니다. 원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다.
 
-원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다.
+설명에 사용한 전체 소스코드는 [https://github.com/goungoun/cream-heros](https://github.com/goungoun/cream-heros) 에서 받으실 수 있습니다.
 
 ## 고양이 파악하기
 
@@ -352,7 +352,7 @@ Error: Specify $LALA_TOKEN in environment
 
 [조대협님 해커톤 교육방송](https://www.youtube.com/watch?v=rdyUAduXi48) 에서 배운 꿀팁 `imagePullPolicy: Always` 가 고양이를 만드는 템플릿인 [./cat/deploy.yaml](https://github.com/goungoun/cream-heros/tree/439c8a505efdd0854a0100b54af1012e703ccbf2/cat/deploy.yaml)에 적용되어 있어서 다른 냥이들 테스트하는 중에는 문제가 되지 않았는데 말이죠.
 
-나중에 알고 보니 수작업으로 테스트한 이 남아있어서 도커 이미지는 v2로 주고 쿠버네티스에는 v1을 계속 배포했던 것이었습니다.
+나중에 알고 보니 제가 아무 생각 없이 도커 이미지는 태그를 v2로 주고 쿠버네티스에는 v1을 계속 배포하고 있었습니다. :\(
 
 ## 모모는 따라쟁이
 
