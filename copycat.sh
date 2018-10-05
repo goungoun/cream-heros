@@ -1,8 +1,16 @@
 #!/bin/bash
-cats=$@
+set -x
+if [[ -z $1 ]]
+  then
+    cats="dummy"
+  else
+    cats=$@
+fi
+
 project=$(gcloud config list project --format 'value(core.project)')
 script=`readlink -f $0`
 path=`dirname ${script}`
+
 for cat in ${cats}; do
   rm -rf ${cat}	
   cp -r cat ${cat}
@@ -11,7 +19,5 @@ for cat in ${cats}; do
   sed -i -e "s/KITTEN/${cat_upper}/g" ${path}/${cat}/*.*
   sed -i -e "s/kitten/${cat_lower}/g" ${path}/${cat}/*.*
   sed -i -e "s/PROJECT/${project}/g" ${path}/${cat}/deploy.yaml
-  docker build -t gcr.io/${project}/${cat}:v1 ${path}/${cat}
-  docker images
-  docker push gcr.io/${project}/${cat}:v1
+  touch ${path}/secret/${cat_lower}-secret
 done

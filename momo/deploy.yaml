@@ -21,6 +21,7 @@ spec:
         env:
         - name: MOMO_TOKEN_PATH
           value: /etc/secret-token/momo-token
+      terminationGracePeriodSeconds: 1
       volumes:
       - name: secret-token
         secret:

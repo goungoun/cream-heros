@@ -60,5 +60,5 @@ controller.on('conversationStarted', function(bot, convo) {
 controller.hears(
   ['lunch', 'dinner', '먹을래', '먹자','냠냠이'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) {
-    bot.reply(message, 'Meow. 안먹어. :smile_cat:')
+    bot.reply(message, 'Meow. 안먹어.:pouting_cat:')
   })

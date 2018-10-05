@@ -56,8 +56,7 @@ controller.hears('사진','direct_mention,direct_message', function(bot, message
 controller.hears('docker','direct_mention,direct_message', function(bot, message) {
 
   bot.startConversation(message, function(err, convo) {
-    convo.say('Ask me anything! 다뎀벼!');
-    convo.ask('도커 커맨드 또 뭘 까먹은건데?', function(answer, convo) {
+    convo.ask('또 뭘 까먹은건데? :scream_cat:', function(answer, convo) {
       var your_answer = answer.text;
       // do something with this answer!
       // storeTacoType(convo.context.user, taco_type);
@@ -68,7 +67,7 @@ controller.hears('docker','direct_mention,direct_message', function(bot, message
          gcr.io/cream-heros/lala:v1');
       convo.say('$ docker ps');
       convo.say('$ docker stop ${CONTAINER ID}');
-      convo.say(your_answer +' 답변이 됐냥?');
+      convo.say(your_answer +' 답변이 됐냥? :smirk_cat:');
       convo.next(); // continue with conversation
     })
   })
@@ -77,7 +76,7 @@ controller.hears('docker','direct_mention,direct_message', function(bot, message
 controller.hears('kubernetes','direct_mention,direct_message', function(bot, message) {
 
   bot.startConversation(message, function(err, convo) {
-    convo.say('Kubenetes는 해적단 LuLu에게~ Sorry~');
+    convo.say('Kubenetes는 해적단 LuLu에게~ Sorry~:cat2:');
     convo.next();
   })
 })

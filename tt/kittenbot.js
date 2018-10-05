@@ -41,4 +41,9 @@ fs.readFile(process.env.TT_TOKEN_PATH, function (err, data) {
 
 controller.hears(
   ['hello', 'hi','tt'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, 'T.T Meow. :crying_cat_face:') })
+
+
+controller.hears(
+  ['candy', '사탕','캔디','행복'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })

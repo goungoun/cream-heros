@@ -40,5 +40,10 @@ fs.readFile(process.env.COCO_TOKEN_PATH, function (err, data) {
 })
 
 controller.hears(
-  ['hello', 'hi','coco'], ['direct_message', 'direct_mention', 'mention'],
+  ['hello', 'hi','안녕','안냥'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
+  
+controller.hears(
+  ['coco','코코'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, '입! :smile_cat:') })
+  
