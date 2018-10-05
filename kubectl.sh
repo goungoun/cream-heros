@@ -1,9 +1,16 @@
 #!/bin/bash
-#set -x
-cats=$@
+set -x
 project=$(gcloud config list project --format 'value(core.project)')
 script=`readlink -f $0`
 path=`dirname ${script}`
+
+if [[ -z $1 ]]
+  then
+    cats=`basename $(pwd)`
+  else
+    cats=$@
+fi
+
 for cat in ${cats};do
   running=`kubectl get pods --selector=app=${cat}|grep -v "NAME                    READY     STATUS    RESTARTS   AGE"|wc -l`
   if [[ ${running} -gt 0 ]];then
