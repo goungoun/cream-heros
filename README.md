@@ -6,7 +6,7 @@ description: Google Cloud Hakathon 2018
 
 ## 오마쥬 크림 히어로즈
 
-이 프로젝트는 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 구글 클라우드 챌린지를 만들어보았습니다. 
+이 프로젝트는 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 구글 클라우드 챌린지를 만들어보았습니다.
 
 원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다.
 
@@ -36,16 +36,16 @@ kitten bot에 고양이의 특징을 반영하기 위해 먼저 냥이들의 특
 
 귀여운 냥이들과 대화하기 위해서는 내 슬랙 채널을 하나 만들어서 모셔와야 합니다. 봇 일곱개를 만들어 설치하고 토큰 일곱개를 미리 잘 챙겨둡니다. 토큰이 저장된 개별 파일 또는 디렉토리는 .gitignore에 등록하셔서 토큰이 유출되지 않도록 해 주세요. 내 토큰은 소중하니까요.
 
-~~~bash
+```bash
 $ mkdir secret
 $ echo "[슬랙 토큰 문자열]" > dd-token
-~~~
+```
 
 ## 버켓에 고양이 사진 올리기
 
 Storage &gt; bucket을 생성하여 고양이 사진을 올려줍니다. 이 사진은 채팅창에 '사진' 이라고 입력하면 사진을 보여주는 용도로 사용할 것입니다.  
- ![./image/lala-show-image.png](.gitbook/assets/lala-show-image%20%281%29.png)  
- 올린 사진을 외부에 오픈하기 위해서는 권한 수정에서 allUsers 그룹을 만들어서 읽기 권한을 줍니다.
+![./image/lala-show-image.png](.gitbook/assets/lala-show-image%20%281%29.png)  
+올린 사진을 외부에 오픈하기 위해서는 권한 수정에서 allUsers 그룹을 만들어서 읽기 권한을 줍니다.
 
 ```text
 Entity: Group
@@ -58,17 +58,18 @@ Access: Reader
 구글 클라우드에 처음 사진을 올리시는 분은 [Extract, Analyze, and Translate Text from Images with the Cloud ML APIs ](https://qwiklabs.com/focuses/1836?parent=catalog)에 Upload an image to a cloud storage bucket을 참고하시면 됩니다.
 
 ## 코드 준비
+
 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)은 매우 섬세한 예제를 담고 있습니다. 토큰을 소스코드에 넣지 않고 환경변수를 받아서 사용하고 있기 때문에 그냥 Copy & Paste하는 방법으로 칠냥이를 만들 수는 없습니다. node 명령어로 스크립트를 실행시킬 때는 이렇게 환경변수를 넘겨서 테스트를 해 주어야 합니다.
-~~~
+
+```text
 $ DD_TOKEN_PATH=./secret/dd-token node ./dd/dd.js
-~~~
+```
 
 칠냥이를 각각의 컨테이너에 태울 때도 쿠버네티스에 배포할 때도 칠냥이의 각 이름과 설정을 여기 저기 고쳐줘야 합니다. 코딩, 도커라이징, 쿠버네티스 클러스터 3단계에서 이 까다로운 챌린지를 쉬운 것처럼 느껴지게 할 어떤 도구의 필요성이 느껴지더군요. 그래서 배시 셸을 미리 준비하여보았습니다.
 
 ### 1단계 : 코딩
-[copycat.sh](copycat.sh) 을 실행시켜 7냥이를 일단 똑같이 만들어줍니다. 한번에 만들어놓고 각 캐릭터를 입혀 대화를 수정해줍니다. <br>
 
-구글 클라우드에서 project를 생성하고 cloud console에서 [copycat.sh](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/copycat.sh)을 실행하여 칠냥이와 관련한 모든 파일을 만들어줍니다. 저는 cream-heros 프로젝트에서 실행하였지만 직접 실습해보시는 경우는 해당 project\_id로 인식해주는 작업이 필요하기 때문에 반드시 한번은 스크립트를 돌려서 각 설정들을 맞춰줘야 합니다.
+[copycat.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/copycat.sh) 을 실행시켜 7냥이를 일단 똑같이 만들어줍니다. 나중에 각 고양이의 캐릭터를 살릴 수 있는 세부적인 코딩이 들어갑니다. 
 
 ```bash
 $ git clone https://github.com/goungoun/cream-heros.git
@@ -84,20 +85,23 @@ $ npm install --save botkit
 ```
 
 ### 2단계: 도커라이징
-[docker.sh](docker.sh) 냥이를 도커 컨테이너에 태우기 위해 꼭 필요한 도커 명령어 모음 입니다.  <br>
-docker build 커맨드를 사용하여 도커 이미지를 만들고 docker push로 gcr.io 구글 클라우드의 레지스트리로 push 해 줍니다. 
+
+[docker.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/docker.sh) 냥이를 도커 컨테이너에 태우기 위해 꼭 필요한 도커 명령어를 하나로 묶어놓았습니다.   
+셸을 실행시킨 후에는 Container Registry 메뉴에서 확인할 수 있습니다.
+
 ```bash
 $ docker build -t gcr.io/cream-heros/dd:v1 .
 $ docker images
 $ docker push gcr.io/cream-heros/dd:v1
 ```
 
-이미지 삭제가 필요할 때는 docker rmi로 삭제할 수 있습니다.
-```
-$ docker rmi ${IMAGE_ID} 
+혹시라도 잘못 만들어서 이미지 삭제가 필요할 때는 docker rmi로 삭제할 수 있습니다.
+
+```text
+$ docker rmi ${IMAGE_ID}
 ```
 
-도커 레지스트리로 올리기 전에 테스트를 미리 해 보고 싶다면 현재 디렉토리에 있는 토큰 파일을 도커와 volume과 연결시켜주어야 합니다. 현재 디렉토리의 dd-token를 도커가 읽어갈 수 있도록 volume을 매핑해주고 도커 내 환경변수에 토큰 파일을 설정하여줍니다.
+gcr.io로 올리기 전에 테스트를 미리 해 보고 싶다면 현재 디렉토리에 있는 토큰 파일을 도커와 volume과 연결시켜주어야 합니다. 아래 명령어는 현재 디렉토리의 dd-token를 도커가 읽어갈 수 있도록 volume을 매핑해주고 도커 내 환경변수에 토큰 파일을 설정하여주는 예제입니다.
 
 ```bash
 $ docker run -d \
@@ -108,13 +112,12 @@ $ docker ps
 $ docker stop ${CONTAINER ID}
 ```
 
-도커 이미지를 push 해 준 다음에는 Container Registry 메뉴에서 확인할 수 있습니다.
-
 ### 3단계: 쿠버네티스에 배포
-[kubectl.sh](kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. <br> 
 
+[kubectl.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. 
 
 ## 슬랙 토큰
+
 Kubernetes &gt; 구성 메뉴로 들어가면 비밀번호, 키, 토큰과 같은 민감한 정보를 저장할 수 있는 공간이 있습니다. 슬랙 토큰은 소스코드에 기록하게되면 유출의 염려가 있기 때문에 별도의 파일에 기록한 다음 쿠버네티스 클러스터에 적용해줍니다. 토큰의 이름은 \_를 사용할 수 없는 것에 유의해주세요.
 
 ```bash
@@ -190,7 +193,7 @@ $ kubectl logs ${POD_NAME} ${CONTAINER_NAME}
 $ kubectl create -f ./dd/deploy.yaml
 ```
 
-동일한 방법으로 tt, momo, lala, chuchu, lulu 도커 이미지도 배포해줍니다. ![./image/workloads.png](.gitbook/assets/workloads%20%281%29.png)
+동일한 방법으로 tt, momo, lala, chuchu, lulu 도커 이미지도 배포해줍니다. ![./image/workloads.png](.gitbook/assets/workloads.png)
 
 ```bash
 $ kubectl delete -f ./dd/deploy.yaml //yaml 파일이 있을 때
@@ -209,7 +212,7 @@ $ kubectl delete deployment dd //yaml 파일이 없을 때 <resource> <name>
   $ kubectl create -f ./dd/deploy.yaml --record
   ```
 
-* 여러개 컨테이너로 POD 만들기 - 일곱냥이 모두 컨테이너에 들어가는 것을 좋아합니다.  [영상 보러가기 ♡♡](https://www.youtube.com/watch?v=bGvsqQW1XOw)
+* 여러개 컨테이너로 POD 만들기 - 일곱냥이 모두 컨테이너에 들어가는 것을 좋아합니다. [영상 보러가기 ♡♡](https://www.youtube.com/watch?v=bGvsqQW1XOw)
 
   ![https://storage.googleapis.com/cream-heros/container\_capsule.png](https://storage.googleapis.com/cream-heros/container_capsule.png)
 
@@ -219,9 +222,10 @@ $ kubectl delete deployment dd //yaml 파일이 없을 때 <resource> <name>
   ```
 
 ## POD는 안전한가요?
-혹시라도 냥이가 다칠까봐 [조대협님의 블로그](http://bcho.tistory.com/1261)에 소개된 리플리케이션 컨트롤러 기능을 테스트 해 보기로 합니다. 이 기능은 POD의 상태를 체크하고 있다가 이상이 있으면 자동으로 재구동해주는 기능이라고 합니다. POD를 강제로 삭제해주면 다시 POD가 올라오는 것을 볼 수 있습니다. 
 
-~~~bash
+혹시라도 냥이가 다칠까봐 [조대협님의 블로그](http://bcho.tistory.com/1261)에 소개된 리플리케이션 컨트롤러 기능을 테스트 해 보기로 합니다. 이 기능은 POD의 상태를 체크하고 있다가 이상이 있으면 자동으로 재구동해주는 기능이라고 합니다. POD를 강제로 삭제해주면 다시 POD가 올라오는 것을 볼 수 있습니다.
+
+```bash
 $ kubectl delete pod --all
 pod "chuchu-847c58df5c-klfnd" deleted
 pod "coco-6586fd94d9-hp4dz" deleted
@@ -255,7 +259,7 @@ lala-7bc6d65c79-dx2zg     1/1       Running   0          1m
 lulu-5b746f57bc-hp2n7     1/1       Running   0          1m
 momo-6bc44d84b9-l6px6     1/1       Running   0          1m
 tt-7566595f89-fxxwx       1/1       Running   0          1m
-~~~
+```
 
 그런데 종료가 마무리 되지 않은 상태에서 바로 재구동해주는 약간의 텀 동안 디디에게 말을 걸어보니 순간적으로 디디가 둘이 되어 두 번 응답을 해 주는 부분은 좀 고민을 해 봐야겠어요.
 
@@ -269,20 +273,14 @@ controller.hears(
   function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
 ```
 
-그리고 새로운 태그를 붙인 이미지를 배포합니다.
-
-```bash
-$ docker build -t gcr.io/cream-heros/dd:v1_1 .
-$ docker images
-$ gcloud docker -- push gcr.io/cream-heros/dd:v1_1
-```
 ## 컨테이너가 좁은 것 같아요
 
-앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다. 디디는 크건 작건 컨테이너처럼 보이는 것이있으면 모든 컨테이너에 머리를 들이밀고 들어가 보려고 하지요.<br>
-![./image/dd-fat.png](./image/dd-fat.png)
+앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다. 디디는 크건 작건 컨테이너처럼 보이는 것이있으면 모든 컨테이너에 머리를 들이밀고 들어가 보려고 하지요.  
+ ![./image/dd-fat.png](.gitbook/assets/dd-fat.png)
 
 몸집이 큰 디디를 위해 클러스터 replica를 2개로 늘려주었습니다.
-~~~bash
+
+```bash
 $ kubectl get deploy
 NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 chuchu    1         1         1            1           2d
@@ -304,23 +302,23 @@ lala      1         1         1            1           9h
 lulu      1         1         1            1           9h
 momo      1         1         1            1           10h
 tt        1         1         1            1           10h
-~~~
+```
 
-그런데 이렇게 하니까 디디가 두 마리로 복제되었습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. 
-![./image/replica-2.png](./image/replica-2.png)
+그런데 이렇게 하니까 디디가 두 마리로 복제되었습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. ![./image/replica-2.png](.gitbook/assets/replica-2.png)
 
 ## 라라는 똑똑하니까
 
 라라는 칠냥이 중에서 제일 똑똑합니다. 크림 히어로즈 [누가 제일 똑똑할까? 고양이 IQ 테스트편 ](https://www.youtube.com/watch?v=jp9liXE_1wc)에서 검증되었지요. 제가 도커나 쿠버네티스 커맨드를 아직 다 못 외워서 맨날 찾아보는데 제 선생님으로 모실까 해요.
 
-![./image/lala-docker-kube.png](./image/lala-docker-kube.png)
+![./image/lala-docker-kube.png](.gitbook/assets/lala-docker-kube%20%281%29.png)
 
-[https://botkit.ai](https://botkit.ai)를 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
+[https://botkit.ai](https://botkit.ai)의 설명을 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
 
 ## 로그 확인하기
-집사가 라라에게 너무 많은 것을 요구하려 했나 봅니다. 재 배포를 하고나서 라라를 아무리 불러도 오지 않아서 원인이 무엇인지를 살펴보았습니다. 
 
-~~~bash
+집사가 라라에게 너무 많은 것을 요구하려 했나 봅니다. 재 배포를 하고나서 라라를 아무리 불러도 오지 않아서 원인이 무엇인지를 `kubectl logs` 로 살펴보았습니다.
+
+```bash
 $ kubectl get pods
 NAME                      READY     STATUS             RESTARTS   AGE
 chuchu-847c58df5c-bsm4j   1/1       Running            0          11h
@@ -335,16 +333,17 @@ $ kubectl logs lala-7bc6d65c79-dx2zg
 Initializing Botkit v0.6.16
 info: ** No persistent storage method specified! Data may be lost when process shuts down.
 Error: Specify $LALA_TOKEN in environment
-~~~
+```
 
 ## 모모는 따라쟁이
-![./image/momo-repeat.png](./image/momo-repeat.png)
 
+![./image/momo-repeat.png](.gitbook/assets/momo-repeat.png)
 
 ## 배포하는 방법 3가지
-- rollout
-- canary
-- blue-green
+
+* rollout
+* canary
+* blue-green
 
 ## 정리
 
