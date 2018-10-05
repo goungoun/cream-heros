@@ -77,21 +77,8 @@ controller.hears('docker','direct_mention,direct_message', function(bot, message
 controller.hears('kubernetes','direct_mention,direct_message', function(bot, message) {
 
   bot.startConversation(message, function(err, convo) {
-    convo.say('Ask me anything! 다뎀벼!');
-    convo.ask('쿠버네티스 커맨드 또 뭘 까먹은건데?', function(answer, convo) {
-      var your_answer = answer.text;
-      // do something with this answer!
-      // storeTacoType(convo.context.user, taco_type);
-      convo.say('$ gcloud docker -- push gcr.io/cream-heros/lala:v1');
-      convo.say('$ docker run -d \
-         -v $(pwd)/secret/:/secret \
-         -e LALA_TOKEN_PATH=/secret/lala-token \
-         gcr.io/cream-heros/lala:v1');
-      convo.say('$ docker ps');
-      convo.say('$ docker stop ${CONTAINER ID}');
-      convo.say(your_answer +' 답변이 됐냥?');
-      convo.next(); // continue with conversation
-    })
+    convo.say('Kubenetes는 해적단 LuLu에게~ Sorry~');
+    convo.next();
   })
 })
 
