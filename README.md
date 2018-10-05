@@ -50,9 +50,8 @@ $ DD_TOKEN_PATH=./secret/dd-token node ./dd/dd.js
 
 칠냥이를 각각의 컨테이너에 태울 때도 쿠버네티스에 배포할 때도 칠냥이의 각 이름과 설정을 여기 저기 고쳐줘야 합니다. 코딩, 도커라이징, 쿠버네티스 클러스터 3단계에서 이 까다로운 챌린지를 쉬운 것처럼 느껴지게 할 어떤 도구의 필요성이 느껴지더군요. 그래서 배시 셸을 미리 준비하여보았습니다.
 
-- 1단계: [copycat.sh](copycat.sh) 1냥이를 7냥이로 만들어주는 스크립트입니다. <br>
-- 2단계: [docker.sh](docker.sh) 냥이를 도커 컨테이너에 태우기 위해 꼭 필요한 도커 명령어 모음 입니다. <br>
-- 3단계: [kubectl.sh](kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. <br>
+### 1단계 : 코딩
+[copycat.sh](copycat.sh) 을 실행시켜 7냥이를 일단 똑같이 만들어줍니다. 한번에 만들어놓고 각 캐릭터를 입혀 대화를 수정해줍니다. <br>
 
 구글 클라우드에서 project를 생성하고 cloud console에서 [copycat.sh](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/copycat.sh)을 실행하여 칠냥이와 관련한 모든 파일을 만들어줍니다. 저는 cream-heros 프로젝트에서 실행하였지만 직접 실습해보시는 경우는 해당 project\_id로 인식해주는 작업이 필요하기 때문에 반드시 한번은 스크립트를 돌려서 각 설정들을 맞춰줘야 합니다.
 
@@ -68,6 +67,12 @@ package.json은 npm init으로 만들수도 있지만 여기서는 그냥 복사
 $ npm init
 $ npm install --save botkit
 ```
+
+### 2단계: 도커라이징
+[docker.sh](docker.sh) 냥이를 도커 컨테이너에 태우기 위해 꼭 필요한 도커 명령어 모음 입니다.  <br>
+
+### 3단계: 쿠버네티스에 배포
+[kubectl.sh](kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. <br>
 
 ## 버켓에 고양이 사진 올리기
 
@@ -93,6 +98,7 @@ Access: Reader
 $ docker build -t gcr.io/cream-heros/dd:v1 .
 $ docker images
 $ docker push gcr.io/cream-heros/dd:v1
+```
 
 이미지 삭제가 필요할 때는 docker rmi로 삭제할 수 있습니다.
 ```
