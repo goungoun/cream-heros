@@ -347,7 +347,7 @@ Error: Specify $LALA_TOKEN in environment
 
 [조대협님 해커톤 교육방송](https://www.youtube.com/watch?v=rdyUAduXi48) 에서 배운 꿀팁 `imagePullPolicy: Always` 가 고양이를 만드는 템플릿인 [./cat/deploy.yaml](./cat/deploy.yaml)에 적용되어 있어서 다른 냥이들 테스트하는 중에는 문제가 되지 않았는데 말이죠. 
 
-나중에 알고 보니 수작업으로 테스트한 거이 남아있어서 도커 이미지는 v2로 주고 쿠버네티스에는 v1을 계속 배포했던 것이었습니다. 
+나중에 알고 보니 수작업으로 테스트한 이 남아있어서 도커 이미지는 v2로 주고 쿠버네티스에는 v1을 계속 배포했던 것이었습니다. 
 
 ## 모모는 따라쟁이
 
