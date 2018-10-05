@@ -65,11 +65,11 @@ Access: Reader
 $ DD_TOKEN_PATH=./secret/dd-token node ./dd/dd.js
 ```
 
-칠냥이를 각각의 컨테이너에 태울 때도 쿠버네티스에 배포할 때도 칠냥이의 각 이름과 설정을 여기 저기 고쳐줘야 합니다. 코딩, 도커라이징, 쿠버네티스 클러스터 배포 3단계에서 이 까다로운 챌린지를 쉬운 것처럼 느껴지게 할 어떤 도구의 필요성이 느껴지더군요. 
+칠냥이를 각각의 컨테이너에 태울 때도 쿠버네티스에 배포할 때도 칠냥이의 각 이름과 설정을 여기 저기 고쳐줘야 합니다. 코딩, 도커라이징, 쿠버네티스 클러스터 배포 3단계에서 이 까다로운 챌린지를 쉬운 것처럼 느껴지게 할 어떤 도구의 필요성이 느껴지더군요.
 
 ### 1단계 : 코딩
 
-[copycat.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/copycat.sh) 을 실행시켜 7냥이를 일단 똑같이 만들어줍니다. 나중에 각 고양이의 캐릭터를 살릴 수 있는 세부적인 코딩이 들어갑니다. 
+[copycat.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/copycat.sh) 을 실행시켜 7냥이를 일단 똑같이 만들어줍니다. 나중에 각 고양이의 캐릭터를 살릴 수 있는 세부적인 코딩이 들어갑니다.
 
 ```bash
 $ git clone https://github.com/goungoun/cream-heros.git
@@ -86,7 +86,7 @@ $ npm install --save botkit
 
 ### 2단계: 도커라이징
 
-[docker.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/docker.sh) 냥이를 도커 컨테이너에 태우기 위해 꼭 필요한 도커 명령어를 하나로 묶어놓았습니다.   
+[docker.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/docker.sh) 냥이를 도커 컨테이너에 태우기 위해 꼭 필요한 도커 명령어를 하나로 묶어놓았습니다.  
 셸을 실행시킨 후에는 Container Registry 메뉴에서 확인할 수 있습니다.
 
 ```bash
@@ -115,7 +115,6 @@ $ docker stop ${CONTAINER ID}
 ### 3단계: 쿠버네티스 배포
 
 [kubectl.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. 쿠버네티스 명령어가 익숙해진 다음에 간편하게 사용합니다.
-
 
 ## 슬랙 토큰
 
@@ -273,18 +272,22 @@ tt-7566595f89-fxxwx       1/1       Running   0          1m
 
 ## 아니, 디디가 한국어를 알아들어?
 
-디디가 한국어를 알아들을 수 있게 [./dd/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/kittenbot.js)를 살짝 수정해봅니다.
+디디가 한국어에 응답할 수 있게 소스코드에 `안녕`을 끼워넣어 봅니다. 
 
+{% code-tabs %}
+{% code-tabs-item title="./dd/kittenbot.js" %}
 ```bash
 controller.hears(
   ['hello', 'hi', 'dd', '안녕'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
 ```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
 ## 컨테이너가 좁은 것 같아요
 
 앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다. 디디는 크건 작건 컨테이너처럼 보이는 것이있으면 모든 컨테이너에 머리를 들이밀고 들어가 보려고 하지요.  
- ![./image/dd-fat.png](.gitbook/assets/dd-fat.png)
+![./image/dd-fat.png](.gitbook/assets/dd-fat.png)
 
 몸집이 큰 디디를 위해 클러스터 replica를 2개로 늘려주었습니다.
 
@@ -312,7 +315,9 @@ momo      1         1         1            1           10h
 tt        1         1         1            1           10h
 ```
 
-그런데 이렇게 하니까 디디가 두 마리로 복제되었습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. ![./image/replica-2.png](.gitbook/assets/replica-2.png)
+그런데 이렇게 하니까 디디가 두 마리로 복제되었습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. 왜요? 왜요?
+
+ ![./image/replica-2.png](.gitbook/assets/replica-2.png)
 
 ## 라라는 똑똑하니까
 
@@ -343,15 +348,26 @@ info: ** No persistent storage method specified! Data may be lost when process s
 Error: Specify $LALA_TOKEN in environment
 ```
 
-이상한데, 예전 코드에서 사용하던 $LALA_TOKEN이 왜 자꾸 나오는 것인가 싶었습니다. 제 코드에는 분명 $LALA_TOKEN_PATH로 고쳐놨는데 말이죠.
+이상한데, 예전 코드에서 사용하던 $LALA\_TOKEN이 왜 자꾸 나오는 것인가 싶었습니다. 제 코드에는 분명 $LALA\_TOKEN\_PATH로 고쳐놨는데 말이죠.
 
-[조대협님 해커톤 교육방송](https://www.youtube.com/watch?v=rdyUAduXi48) 에서 배운 꿀팁 `imagePullPolicy: Always` 가 고양이를 만드는 템플릿인 [./cat/deploy.yaml](./cat/deploy.yaml)에 적용되어 있어서 다른 냥이들 테스트하는 중에는 문제가 되지 않았는데 말이죠. 
+[조대협님 해커톤 교육방송](https://www.youtube.com/watch?v=rdyUAduXi48) 에서 배운 꿀팁 `imagePullPolicy: Always` 가 고양이를 만드는 템플릿인 [./cat/deploy.yaml](https://github.com/goungoun/cream-heros/tree/439c8a505efdd0854a0100b54af1012e703ccbf2/cat/deploy.yaml)에 적용되어 있어서 다른 냥이들 테스트하는 중에는 문제가 되지 않았는데 말이죠.
 
-나중에 알고 보니 수작업으로 테스트한 이 남아있어서 도커 이미지는 v2로 주고 쿠버네티스에는 v1을 계속 배포했던 것이었습니다. 
+나중에 알고 보니 수작업으로 테스트한 이 남아있어서 도커 이미지는 v2로 주고 쿠버네티스에는 v1을 계속 배포했던 것이었습니다.
 
 ## 모모는 따라쟁이
 
+모모는 대화중에 받은 답변을 그대로 말하도록 구현해보았습니다. 자꾸 따라해서 화는 나는데 흥칫칫뿡까지 그대로 따라하는 모모냥이네요. 
+
 ![./image/momo-repeat.png](.gitbook/assets/momo-repeat.png)
+
+{% code-tabs %}
+{% code-tabs-item title="momo/kittenbot.js" %}
+```text
+      var your_answer = answer.text;
+      convo.say(answer.text);
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
 ## 배포하는 방법 3가지
 
