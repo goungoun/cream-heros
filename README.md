@@ -116,6 +116,8 @@ $ docker stop ${CONTAINER ID}
 
 [kubectl.sh](https://github.com/goungoun/cream-heros/tree/6eaee31c9cf5bb3181508a513377e5e7d772e2f3/kubectl.sh) 냥이 컨테이너를 생성하고 운영하는데 꼭 필요한 쿠버네티스 명령어 모음입니다. 쿠버네티스 명령어가 익숙해진 다음에 간편하게 사용합니다.
 
+위 모든 단계에서 버전은 v1만 사용하고 있고 몇 번의 테스를 하는 과정 내내 v1만 사용하였습니다. 사실은 이렇게하면 수정한 것이 반영이 되지 않는 문제가 있을 수 있는데 이 부분은 [조대협님 해커톤 교육방송](https://www.youtube.com/watch?v=rdyUAduXi48) 에서 배운 꿀팁으로 해결하였습니다. `imagePullPolicy: Always` 를 고양이를 만드는 템플릿인 [./cat/deploy.yaml](./cat/deploy.yaml)에 적용하여 캐싱은 문제가 되지 않았습니다.
+
 ## 슬랙 토큰
 
 Kubernetes &gt; 구성 메뉴로 들어가면 비밀번호, 키, 토큰과 같은 민감한 정보를 저장할 수 있는 공간이 있습니다. 슬랙 토큰은 소스코드에 기록하게되면 유출의 염려가 있기 때문에 별도의 파일에 기록한 다음 쿠버네티스 클러스터에 적용해줍니다. 토큰의 이름은 \_를 사용할 수 없는 것에 유의해주세요.
@@ -228,7 +230,7 @@ $ kubectl delete deployment dd //yaml 파일이 없을 때 <resource> <name>
   $ kubectl create -f ./chuchu/deploy.yaml
   ```
 
-## POD는 안전한가요?
+### POD는 안전한가요?
 
 혹시라도 냥이가 다칠까봐 [조대협님의 블로그](http://bcho.tistory.com/1261)에 소개된 리플리케이션 컨트롤러 기능을 테스트 해 보기로 합니다. 이 기능은 POD의 상태를 체크하고 있다가 이상이 있으면 자동으로 재구동해주는 기능이라고 합니다. POD를 강제로 삭제해주면 다시 POD가 올라오는 것을 볼 수 있습니다.
 
@@ -341,6 +343,8 @@ Initializing Botkit v0.6.16
 info: ** No persistent storage method specified! Data may be lost when process shuts down.
 Error: Specify $LALA_TOKEN in environment
 ```
+
+이상한데, 예전 코드에서 사용하던 $LALA_TOKEN이 왜 자꾸 나오는 것인가 싶었습니다. 제 코드에는 분명 $LALA_TOKEN_PATH로 고쳐놨는데 말이죠. 그 이유는 수정한 후에 버전을 도커 이미지는 v2로 주고 쿠버네티스에는 v1을 계속 배포했던 것이었습니다. 
 
 ## 모모는 따라쟁이
 
