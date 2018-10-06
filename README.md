@@ -6,13 +6,13 @@ description: Google Cloud Hakathon 2018
 
 ## 오마쥬 크림 히어로즈
 
-여기서 소개할 내용은 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 토이 프로젝트 입니다. 원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다.
+여기서 소개할 내용은 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 토이 프로젝트 입니다. 원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다. 
 
 설명에 사용한 전체 소스코드는 [https://github.com/goungoun/cream-heros](https://github.com/goungoun/cream-heros) 에서 받으실 수 있고 [https://join.slack.com/t/cream-heros/signup](https://join.slack.com/t/cream-heros/signup) 에 G-mail로 join하셔서 냥이와 대화해볼 수 있습니다.
 
 ## 고양이 파악하기
 
-kitten bot에 고양이의 특징을 반영하기 위해 먼저 냥이들의 특징을 분석해봅니다.
+먼저 kitten bot에 고양이의 특징을 반영하기 위해 냥이들의 특징을 분석해봅니다. 봇에 기능을 추가해보면서 쿠버네티스를 어떻게 운영할 수 있는지 알아가보려고 합니다.
 
 * hi 라고 인사하면 모든 고양이가 meow라고 인사해줍니다.
 * dd 라고 부르면 고양이 디디가 자기 이름인 것을 알아듣고 meow라고 인사해줍니다.
