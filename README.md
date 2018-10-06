@@ -377,11 +377,38 @@ Error: Specify $LALA_TOKEN in environment
 코코도 집사랑 놀고싶어요~ 냐옹~ <br>
 ![./image/coco-fun.png](./image/coco-fun.png)
 
-~~~bash
+coco/kittenbot.js에 코드를 수정해줍니다.
+~~~javascript
 controller.hears(
   ['coco','코코'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, '입! :smile_cat:') })
 ~~~
+
+그리고 바로 그 디렉토리에서 [../doocker.sh](../docker.sh) [../kubectl.sh](../docker) 를 실행시켜줍니다.
+그러면 현재 디렉토리명으로 인식해서 모든 것이 자동으로 적용되는데 그것을 가능하게 하는 부분이 이 부분입니다.
+~~~bash
+script=`readlink -f $0`
+path=`dirname ${script}`
+
+for cat in ${cats};do
+  running=`kubectl get pods --selector=app=${cat}|grep -v "NAME                    READY     STATUS    RESTARTS   AGE"|wc -l`
+  if [[ ${running} -gt 0 ]];then
+    kubectl delete -f "${path}/${cat}/deploy.yaml"
+  fi
+  sleep 5
+  kubectl create -f "${path}/${cat}/deploy.yaml"
+  kubectl get deploy
+  kubectl get pods
+done
+~~~
+
+## 코코와 모모, 티티가 외출하고 싶어해요
+위에 만든 스크립트로 코코와 모모를 재시작해봅니다. 코코와 모모에게 외출복을 입혀서 도커 이미지를 새로 만든 뒤 쿠버네티스에 동시에 배포합니다.
+~~~bash
+$ ./docker.sh coco momo tt
+$ ./kubectl.sh coco momo tt
+~~~
+
 
 ## 정리
 
