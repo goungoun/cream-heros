@@ -327,6 +327,20 @@ tt        1         1         1            1           10h
 
 [https://botkit.ai](https://botkit.ai)의 설명을 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
 
+## 루루 내 쿠베 왜 훔쳐가냥
+라라가 쿠버네티스는 루루한테 물어보래서 루루한테 갔더니 제가 볼 교육방송을 물고 훔쳐가네요.<br>
+![./image/lulu-kube.png](./image/lulu-kube.png) <br>
+
+~~~javascript
+controller.hears(
+  ['hello', 'hi','lulu'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, 'Meow. 안녕? 난 해적이야. 루루라고 해 :smile_cat:') })
+
+controller.hears(
+  ['kubernetes','kube','쿠베','쿠버네티스'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, 'Terry Cho 동영상은 내가 가져간다~ 데헷 =3 =3 https://www.youtube.com/watch?v=rdyUAduXi48&feature=youtu.be') })
+~~~
+
 ## 로그 확인하기
 
 집사가 라라에게 너무 많은 것을 요구하려 했나 봅니다. 재 배포를 하고나서 라라를 아무리 불러도 오지 않아서 원인이 무엇인지를 `kubectl logs` 로 살펴보았습니다.
