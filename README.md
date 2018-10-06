@@ -6,7 +6,7 @@ description: Google Cloud Hakathon 2018
 
 ## 오마쥬 크림 히어로즈
 
-여기서 소개할 내용은 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 토이 프로젝트 입니다. 원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다. 
+여기서 소개할 내용은 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 토이 프로젝트 입니다. 원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다.
 
 설명에 사용한 전체 소스코드는 [https://github.com/goungoun/cream-heros](https://github.com/goungoun/cream-heros) 에서 받으실 수 있고 [https://join.slack.com/t/cream-heros/signup](https://join.slack.com/t/cream-heros/signup) 에 G-mail로 join하셔서 냥이와 대화해볼 수 있습니다.
 
@@ -272,7 +272,7 @@ tt-7566595f89-fxxwx       1/1       Running   0          1m
 
 ## 아니, 디디가 한국어를 알아들어?
 
-디디가 한국어에 응답할 수 있게 소스코드에 `안녕`을 끼워넣어 봅니다. 
+디디가 한국어에 응답할 수 있게 소스코드에 `안녕`을 끼워넣어 봅니다.
 
 {% code-tabs %}
 {% code-tabs-item title="./dd/kittenbot.js" %}
@@ -317,7 +317,7 @@ tt        1         1         1            1           10h
 
 그런데 이렇게 하니까 디디가 두 마리로 복제되었습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. 왜요? 왜요?
 
- ![./image/replica-2.png](.gitbook/assets/replica-2.png)
+![./image/replica-2.png](.gitbook/assets/replica-2.png)
 
 ## 라라는 똑똑하니까
 
@@ -328,10 +328,12 @@ tt        1         1         1            1           10h
 [https://botkit.ai](https://botkit.ai)의 설명을 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
 
 ## 루루 내 쿠베 왜 훔쳐가냥
-라라가 쿠버네티스는 루루한테 물어보래서 루루한테 갔더니 제가 볼 교육방송을 물고 훔쳐가네요.<br>
-![./image/lulu-kube.png](./image/lulu-kube.png) <br>
 
-~~~javascript
+라라가 쿠버네티스는 루루한테 물어보래서 루루한테 갔더니 제가 볼 교육방송을 물고 훔쳐가네요.  
+ ![./image/lulu-kube.png](.gitbook/assets/lulu-kube.png)   
+
+
+```javascript
 controller.hears(
   ['hello', 'hi','lulu'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Meow. 안녕? 난 해적이야. 루루라고 해 :smile_cat:') })
@@ -339,7 +341,7 @@ controller.hears(
 controller.hears(
   ['kubernetes','kube','쿠베','쿠버네티스'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Terry Cho 동영상은 내가 가져간다~ 데헷 =3 =3 https://www.youtube.com/watch?v=rdyUAduXi48&feature=youtu.be') })
-~~~
+```
 
 ## 로그 확인하기
 
@@ -370,7 +372,7 @@ Error: Specify $LALA_TOKEN in environment
 
 ## 모모는 따라쟁이
 
-모모는 대화중에 받은 답변을 그대로 말하도록 구현해보았습니다. 자꾸 따라해서 화는 나는데 흥칫칫뿡까지 그대로 따라하는 모모냥이네요. 
+모모는 대화중에 받은 답변을 그대로 말하도록 구현해보았습니다. 자꾸 따라해서 화는 나는데 흥칫칫뿡까지 그대로 따라하는 모모냥이네요.
 
 ![./image/momo-repeat.png](.gitbook/assets/momo-repeat.png)
 
@@ -384,47 +386,35 @@ Error: Specify $LALA_TOKEN in environment
 {% endcode-tabs %}
 
 ## 티티는 자꾸 울어요
-티티는 자꾸 울어서 TT 캔디로 달래봅니다.<br>
-![./image/tt-candy.png](./image/tt-candy.png)
+
+티티는 자꾸 울어서 TT 캔디로 달래봅니다.  
+ ![./image/tt-candy.png](.gitbook/assets/tt-candy.png)
 
 ## 코코도 놀아주세요
-코코도 집사랑 놀고싶어요~ 냐옹~ <br>
-![./image/coco-fun.png](./image/coco-fun.png)
+
+코코도 집사랑 놀고싶어요~ 냐옹~   
+ ![./image/coco-fun.png](.gitbook/assets/coco-fun.png)
 
 coco/kittenbot.js에 코드를 수정해줍니다.
-~~~javascript
+
+```javascript
 controller.hears(
   ['coco','코코'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, '입! :smile_cat:') })
-~~~
+```
 
-그리고 바로 그 디렉토리에서 [../doocker.sh](../docker.sh) [../kubectl.sh](../docker) 를 실행시켜줍니다.
-그러면 현재 디렉토리명으로 인식해서 모든 것이 자동으로 적용되는데 그것을 가능하게 하는 부분이 이 부분입니다.
-~~~bash
-script=`readlink -f $0`
-path=`dirname ${script}`
-
-for cat in ${cats};do
-  running=`kubectl get pods --selector=app=${cat}|grep -v "NAME                    READY     STATUS    RESTARTS   AGE"|wc -l`
-  if [[ ${running} -gt 0 ]];then
-    kubectl delete -f "${path}/${cat}/deploy.yaml"
-  fi
-  sleep 5
-  kubectl create -f "${path}/${cat}/deploy.yaml"
-  kubectl get deploy
-  kubectl get pods
-done
-~~~
+그리고 바로 그 디렉토리에서 [../doocker.sh](https://github.com/goungoun/cream-heros/tree/1e8bdf1d5a914399432bf5450ba5ddd35168b559/docker.sh) [../kubectl.sh](https://github.com/goungoun/cream-heros/tree/1e8bdf1d5a914399432bf5450ba5ddd35168b559/docker/README.md) 를 실행시켜줍니다. 
 
 ## 코코와 모모, 티티가 외출하고 싶어해요
+
 코코와 모모에게 외출복을 입혀서 도커 이미지를 새로 만든 뒤 쿠버네티스에 동시에 배포합니다. 잘 될꺼에요.
-~~~bash
+
+```bash
 $ ./docker.sh coco momo tt
 $ ./kubectl.sh coco momo tt
-~~~
-
+```
 
 ## 정리
 
-귀여운 칠냥이와 집사놀이를 하면서 쿠버네티스 기본 명령어와 여러가지 돌발 상황에 대처하는 시간을 가져보았습니다. 도커가 일곱개로 늘어나니까 퀵랩 예제 코드 실행해볼 때하고는 또 다른 느낌이었던 것 같습니다. 이 글이 한 개의 컨테이너를 사용하는  헬로우 월드와 많은 도커 컨테이너를 사용하는 실제 운영과의 갭을 채워주는데에도 작은 도움이 될 수 있었으면 좋겠습니다. 감사합니다.
+귀여운 칠냥이와 집사놀이를 하면서 쿠버네티스 기본 명령어와 여러가지 돌발 상황에 대처하는 시간을 가져보았습니다. 도커가 일곱개로 늘어나니까 퀵랩 예제 코드 실행해볼 때하고는 또 다른 느낌이었던 것 같습니다. 이 글이 한 개의 컨테이너를 사용하는 헬로우 월드와 많은 도커 컨테이너를 사용하는 실제 운영과의 갭을 채워주는데에도 작은 도움이 될 수 있었으면 좋겠습니다. 감사합니다.
 
