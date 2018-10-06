@@ -370,11 +370,18 @@ Error: Specify $LALA_TOKEN in environment
 {% endcode-tabs %}
 
 ## 티티는 자꾸 울어요
-티티는 자꾸 울어서 TT 캔디로 달래봅니다.
+티티는 자꾸 울어서 TT 캔디로 달래봅니다.<br>
 ![./image/tt-candy.png](./image/tt-candy.png)
 
 ## 코코도 놀아주세요
+코코도 집사랑 놀고싶어요~ 냐옹~ <br>
 ![./image/coco-fun.png](./image/coco-fun.png)
+
+~~~bash
+controller.hears(
+  ['coco','코코'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, '입! :smile_cat:') })
+~~~
 
 ## 정리
 
