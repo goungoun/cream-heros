@@ -8,7 +8,7 @@ description: Google Cloud Hakathon 2018
 
 여기서 소개할 내용은 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 토이 프로젝트 입니다. 원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다.
 
-설명에 사용한 전체 소스코드는 [https://github.com/goungoun/cream-heros](https://github.com/goungoun/cream-heros) 에서 받으실 수 있습니다.
+설명에 사용한 전체 소스코드는 [https://github.com/goungoun/cream-heros](https://github.com/goungoun/cream-heros) 에서 받으실 수 있고 [https://join.slack.com/t/cream-heros/signup](https://join.slack.com/t/cream-heros/signup) 에 G-mail로 join하셔서 냥이와 대화해볼 수 있습니다.
 
 ## 고양이 파악하기
 
@@ -371,7 +371,5 @@ Error: Specify $LALA_TOKEN in environment
 
 ## 정리
 
-귀여운 칠냥이와 집사놀이를 하면서 쿠버네티스 기본 명령어와 여러가지 돌발 상황에 대처하는 시간을 가져보았습니다. 도커가 일곱개로 늘어나니까 퀵랩 예제 코드 실행해볼 때하고는 또 다른 느낌이었던 것 같습니다. 이 글이 한 개의 컨테이너를 사용하는  헬로우 월드와 많은 도커 컨테이너를 사용하는 실제 운영과의 갭을 채워주는데에도 작은 도움이 될 수 있었으면 좋겠습니다. 
-
-고양이 봇 데모를 실행해보고 싶으신 분은 [https://www.facebook.com/groups/googlecloudkorea/](https://www.facebook.com/groups/googlecloudkorea/) 게시물에 댓글 주시면 슬랙에 초대해드리도록 하겠습니다. 감사합니다.
+귀여운 칠냥이와 집사놀이를 하면서 쿠버네티스 기본 명령어와 여러가지 돌발 상황에 대처하는 시간을 가져보았습니다. 도커가 일곱개로 늘어나니까 퀵랩 예제 코드 실행해볼 때하고는 또 다른 느낌이었던 것 같습니다. 이 글이 한 개의 컨테이너를 사용하는  헬로우 월드와 많은 도커 컨테이너를 사용하는 실제 운영과의 갭을 채워주는데에도 작은 도움이 될 수 있었으면 좋겠습니다. 감사합니다.
 
