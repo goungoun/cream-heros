@@ -406,7 +406,7 @@ controller.hears(
   function (bot, message) { bot.reply(message, '입! :smile_cat:') })
 ```
 
-그리고 바로 그 디렉토리에서 [../doocker.sh](https://github.com/goungoun/cream-heros/tree/1e8bdf1d5a914399432bf5450ba5ddd35168b559/docker.sh) [../kubectl.sh](https://github.com/goungoun/cream-heros/tree/1e8bdf1d5a914399432bf5450ba5ddd35168b559/docker/README.md) 를 실행시켜줍니다.
+그리고 바로 그 디렉토리에서 [../docker.sh](../docker.sh) [../kubectl.sh](..kubectl.sh)를 실행시켜줍니다. 인자를 넘기지 않으면 소스 파일이 있는 디렉토리명을 인식하여 배포할 수 있도록 셸 스크립트를 수정해놓았습니다.
 
 ## 코코와 모모, 티티가 외출하고 싶어해요
 
