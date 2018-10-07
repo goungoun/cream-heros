@@ -372,9 +372,9 @@ Error: Specify $LALA_TOKEN in environment
 
 ![./image/momo-repeat.png](.gitbook/assets/momo-repeat.png)
 
-```text
-      var your_answer = answer.text;
-      convo.say(answer.text);
+```javascript
+var your_answer = answer.text;
+convo.say(answer.text);
 ```
 
 ## 티티는 자꾸 울어요
