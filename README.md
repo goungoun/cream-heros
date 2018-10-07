@@ -326,8 +326,7 @@ tt        1         1         1            1           10h
 ## 루루 내 쿠베 왜 훔쳐가냥
 
 라라가 쿠버네티스는 루루한테 물어보래서 루루한테 갔더니 제가 볼 교육방송을 물고 훔쳐가네요.  
- ![./image/chat-lulu.png](.gitbook/assets/chat_lulu.png)   
-
+ ![./image/chat_lulu.png](./image/chat_lulu.png)
 
 ```javascript
 controller.hears(
