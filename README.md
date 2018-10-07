@@ -44,8 +44,10 @@ $ echo "[슬랙 토큰 문자열]" > dd-token
 ## 버켓에 고양이 사진 올리기
 
 Storage &gt; bucket을 생성하여 고양이 사진을 올려줍니다. 이 사진은 채팅창에 '사진' 이라고 입력하면 사진을 보여주는 용도로 사용할 것입니다.  
-![./image/lala-show-image.png](.gitbook/assets/lala-show-image%20%281%29.png)  
+  
 올린 사진을 외부에 오픈하기 위해서는 권한 수정에서 allUsers 그룹을 만들어서 읽기 권한을 줍니다.
+
+![](.gitbook/assets/lala-show-image%20%281%29.png)
 
 ```text
 Entity: Group
@@ -193,7 +195,9 @@ $ kubectl logs ${POD_NAME} ${CONTAINER_NAME}
 $ kubectl create -f ./dd/deploy.yaml
 ```
 
-동일한 tt, momo, lala, chuchu, lulu 도커 이미지도 배포해줍니다. ![./image/workloads.png](.gitbook/assets/workloads.png)
+동일한 tt, momo, lala, chuchu, lulu 도커 이미지도 배포해줍니다. 
+
+![](.gitbook/assets/workloads.png)
 
 혹시라도 배포가 잘못된 경우는 삭제하고 다시 생성해주면 되지요.
 
@@ -210,23 +214,23 @@ $ kubectl delete deployment dd //yaml 파일이 없을 때 <resource> <name>
 
   ![https://storage.googleapis.com/cream-heros/dd\_one\_container.png](https://storage.googleapis.com/cream-heros/dd_one_container.png)
 
-  ```bash
-  $ kubectl create -f ./dd/deploy.yaml
-  ```
+```bash
+$ kubectl create -f ./dd/deploy.yaml
+```
 
 * 1냥 1 POD - 일곱냥이 모두 컨테이너에 들어가는 것을 좋아합니다. [영상 보러가기 ♡♡](https://www.youtube.com/watch?v=bGvsqQW1XOw)
 
   ![https://storage.googleapis.com/cream-heros/container\_capsule.png](https://storage.googleapis.com/cream-heros/container_capsule.png)
 
-  ```bash
-  $ kubectl create -f ./dd/deploy.yaml
-  $ kubectl create -f ./tt/deploy.yaml
-  $ kubectl create -f ./momo/deploy.yaml
-  $ kubectl create -f ./lulu/deploy.yaml
-  $ kubectl create -f ./lala/deploy.yaml
-  $ kubectl create -f ./coco/deploy.yaml
-  $ kubectl create -f ./chuchu/deploy.yaml
-  ```
+```bash
+$ kubectl create -f ./dd/deploy.yaml
+$ kubectl create -f ./tt/deploy.yaml
+$ kubectl create -f ./momo/deploy.yaml
+$ kubectl create -f ./lulu/deploy.yaml
+$ kubectl create -f ./lala/deploy.yaml
+$ kubectl create -f ./coco/deploy.yaml
+$ kubectl create -f ./chuchu/deploy.yaml
+```
 
 ### POD는 안전한가요?
 
@@ -283,7 +287,9 @@ controller.hears(
 ## 컨테이너가 좁은 것 같아요
 
 앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다. 디디는 크건 작건 컨테이너처럼 보이는 것이있으면 모든 컨테이너에 머리를 들이밀고 들어가 보려고 하지요.  
-![./image/dd-fat.png](.gitbook/assets/dd-fat.png)
+
+
+![](.gitbook/assets/dd-fat.png)
 
 몸집이 큰 디디를 위해 클러스터 replica를 2개로 늘려주었습니다.
 
@@ -313,20 +319,22 @@ tt        1         1         1            1           10h
 
 그런데 이렇게 하니까 디디가 두 마리로 복제되었습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. 왜요? 왜요?
 
-![./image/replica-2.png](.gitbook/assets/replica-2.png)
+![](.gitbook/assets/replica-2.png)
 
 ## 라라는 똑똑하니까
 
 라라는 칠냥이 중에서 제일 똑똑합니다. 크림 히어로즈 [누가 제일 똑똑할까? 고양이 IQ 테스트편 ](https://www.youtube.com/watch?v=jp9liXE_1wc)에서 검증되었지요. 제가 도커나 쿠버네티스 커맨드를 아직 다 못 외워서 맨날 찾아보는데 제 선생님으로 모실까 해요.
 
-![./image/lala-docker-kube.png](.gitbook/assets/lala-docker-kube%20%281%29.png)
+![](.gitbook/assets/lala-docker-kube%20%281%29.png)
 
 [https://botkit.ai](https://botkit.ai)의 설명을 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
 
 ## 루루 내 쿠베 왜 훔쳐가냥
 
 라라가 쿠버네티스는 루루한테 물어보래서 루루한테 갔더니 제가 볼 교육방송을 물고 훔쳐가네요.  
- ![./image/chat-lulu.png](./image/chat-lulu.png)
+
+
+![](.gitbook/assets/chat-lulu.png)
 
 ```javascript
 controller.hears(
@@ -369,7 +377,7 @@ Error: Specify $LALA_TOKEN in environment
 
 모모는 대화중에 받은 답변을 그대로 말하도록 구현해보았습니다. 자꾸 따라해서 화는 나는데 흥칫칫뿡까지 그대로 따라하는 모모냥이네요.
 
-![./image/momo-repeat.png](.gitbook/assets/momo-repeat.png)
+![](.gitbook/assets/momo-repeat.png)
 
 ```javascript
 var your_answer = answer.text;
@@ -379,12 +387,16 @@ convo.say(answer.text);
 ## 티티는 자꾸 울어요
 
 티티는 자꾸 울어서 TT 캔디로 달래봅니다.  
- ![./image/tt-candy.png](.gitbook/assets/tt-candy.png)
+
+
+![](.gitbook/assets/tt-candy.png)
 
 ## 코코도 놀아주세요
 
-코코도 집사랑 놀고싶어요~ 냐옹~   
- ![./image/coco-fun.png](.gitbook/assets/coco-fun.png)
+코코도 집사랑 놀고싶어요~ 냐옹~  
+
+
+![](.gitbook/assets/coco-fun.png)
 
 coco/kittenbot.js에 코드를 수정해줍니다.
 
@@ -394,7 +406,7 @@ controller.hears(
   function (bot, message) { bot.reply(message, '입! :smile_cat:') })
 ```
 
-그리고 바로 그 디렉토리에서 [../doocker.sh](https://github.com/goungoun/cream-heros/tree/1e8bdf1d5a914399432bf5450ba5ddd35168b559/docker.sh) [../kubectl.sh](https://github.com/goungoun/cream-heros/tree/1e8bdf1d5a914399432bf5450ba5ddd35168b559/docker/README.md) 를 실행시켜줍니다. 
+그리고 바로 그 디렉토리에서 [../doocker.sh](https://github.com/goungoun/cream-heros/tree/1e8bdf1d5a914399432bf5450ba5ddd35168b559/docker.sh) [../kubectl.sh](https://github.com/goungoun/cream-heros/tree/1e8bdf1d5a914399432bf5450ba5ddd35168b559/docker/README.md) 를 실행시켜줍니다.
 
 ## 코코와 모모, 티티가 외출하고 싶어해요
 
