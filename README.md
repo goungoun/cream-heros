@@ -274,15 +274,11 @@ tt-7566595f89-fxxwx       1/1       Running   0          1m
 
 디디가 한국어에 응답할 수 있게 소스코드에 `안녕`을 끼워넣어 봅니다.
 
-{% code-tabs %}
-{% code-tabs-item title="./dd/kittenbot.js" %}
 ```bash
 controller.hears(
   ['hello', 'hi', 'dd', '안녕'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 ## 컨테이너가 좁은 것 같아요
 
@@ -376,14 +372,10 @@ Error: Specify $LALA_TOKEN in environment
 
 ![./image/momo-repeat.png](.gitbook/assets/momo-repeat.png)
 
-{% code-tabs %}
-{% code-tabs-item title="momo/kittenbot.js" %}
 ```text
       var your_answer = answer.text;
       convo.say(answer.text);
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 ## 티티는 자꾸 울어요
 
