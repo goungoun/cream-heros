@@ -6,20 +6,20 @@ description: Google Cloud Hakathon 2018
 
 ## 오마쥬 크림 히어로즈
 
-이 프로젝트는 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 구글 클라우드 챌린지를 만들어보았습니다.
+여기서 소개할 내용은 [QwikLab - Build a Slack Bot with Node.js on Kubernetes](https://qwiklabs.com/focuses/635?parent=catalog)에서 소개하고 있는 [Google Codelab](https://github.com/googlecodelabs/cloud-slack-bot.git)을 응용한 것으로 고양이 슬랙봇 일곱 마리를 도커 컨테이너에 담아 키워보는 토이 프로젝트 입니다. 원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다.
 
-원본 kitten bot 예제 코드에서는 새끼 고양이 한 마리만 등장하지만 고양이가 외로울 수 있기 때문에 유명한 유튜브 채널인 [크림 히어로즈](https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w)에서 처럼 행복한 일곱 냥이를 키워보고 싶었습니다.
+설명에 사용한 전체 소스코드는 [https://github.com/goungoun/cream-heros](https://github.com/goungoun/cream-heros) 에서 받으실 수 있고 [https://join.slack.com/t/cream-heros/signup](https://join.slack.com/t/cream-heros/signup) 에 G-mail로 join하셔서 냥이와 대화해볼 수 있습니다.
 
 ## 고양이 파악하기
 
-kitten bot에 고양이의 특징을 반영하기 위해 먼저 냥이들의 특징을 분석해봅니다.
+먼저 kitten bot에 고양이의 특징을 반영하기 위해 냥이들의 특징을 분석해봅니다. 봇에 기능을 추가해보면서 쿠버네티스를 어떻게 운영할 수 있는지 알아가보려고 합니다.
 
 * hi 라고 인사하면 모든 고양이가 meow라고 인사해줍니다.
 * dd 라고 부르면 고양이 디디가 자기 이름인 것을 알아듣고 meow라고 인사해줍니다.
 * tt 라고 부르면 티티가 달려와서 meow라고 인사해줍니다.
 * 털뚠뚠이 디디는 밥먹으라고 하면 늦게오고 꼭 딴청을 피웁니다.
 * 루루는 가끔 똑똑합니다.
-* 라라는 해적이에요~
+* 라라는 해적이에요. 장난감 같은 것을 잘 물고 절대로 안 놔주며 으르렁 댑니다.
 * 고양이들은 공간이 좁으면 잘 싸웁니다. 하지만 크림히어로즈 집사처럼 여유로운 환경을 제공해주면 잘 지내기도 합니다.
 
 ## 클라우드 챌린지
@@ -44,8 +44,10 @@ $ echo "[슬랙 토큰 문자열]" > dd-token
 ## 버켓에 고양이 사진 올리기
 
 Storage &gt; bucket을 생성하여 고양이 사진을 올려줍니다. 이 사진은 채팅창에 '사진' 이라고 입력하면 사진을 보여주는 용도로 사용할 것입니다.  
-![./image/lala-show-image.png](.gitbook/assets/lala-show-image%20%281%29.png)  
+  
 올린 사진을 외부에 오픈하기 위해서는 권한 수정에서 allUsers 그룹을 만들어서 읽기 권한을 줍니다.
+
+![](.gitbook/assets/lala-show-image%20%281%29.png)
 
 ```text
 Entity: Group
@@ -193,7 +195,9 @@ $ kubectl logs ${POD_NAME} ${CONTAINER_NAME}
 $ kubectl create -f ./dd/deploy.yaml
 ```
 
-동일한 tt, momo, lala, chuchu, lulu 도커 이미지도 배포해줍니다. ![./image/workloads.png](.gitbook/assets/workloads.png)
+동일한 tt, momo, lala, chuchu, lulu 도커 이미지도 배포해줍니다. 
+
+![](.gitbook/assets/workloads.png)
 
 혹시라도 배포가 잘못된 경우는 삭제하고 다시 생성해주면 되지요.
 
@@ -210,23 +214,23 @@ $ kubectl delete deployment dd //yaml 파일이 없을 때 <resource> <name>
 
   ![https://storage.googleapis.com/cream-heros/dd\_one\_container.png](https://storage.googleapis.com/cream-heros/dd_one_container.png)
 
-  ```bash
-  $ kubectl create -f ./dd/deploy.yaml
-  ```
+```bash
+$ kubectl create -f ./dd/deploy.yaml
+```
 
 * 1냥 1 POD - 일곱냥이 모두 컨테이너에 들어가는 것을 좋아합니다. [영상 보러가기 ♡♡](https://www.youtube.com/watch?v=bGvsqQW1XOw)
 
   ![https://storage.googleapis.com/cream-heros/container\_capsule.png](https://storage.googleapis.com/cream-heros/container_capsule.png)
 
-  ```bash
-  $ kubectl create -f ./dd/deploy.yaml
-  $ kubectl create -f ./tt/deploy.yaml
-  $ kubectl create -f ./momo/deploy.yaml
-  $ kubectl create -f ./lulu/deploy.yaml
-  $ kubectl create -f ./lala/deploy.yaml
-  $ kubectl create -f ./coco/deploy.yaml
-  $ kubectl create -f ./chuchu/deploy.yaml
-  ```
+```bash
+$ kubectl create -f ./dd/deploy.yaml
+$ kubectl create -f ./tt/deploy.yaml
+$ kubectl create -f ./momo/deploy.yaml
+$ kubectl create -f ./lulu/deploy.yaml
+$ kubectl create -f ./lala/deploy.yaml
+$ kubectl create -f ./coco/deploy.yaml
+$ kubectl create -f ./chuchu/deploy.yaml
+```
 
 ### POD는 안전한가요?
 
@@ -272,22 +276,20 @@ tt-7566595f89-fxxwx       1/1       Running   0          1m
 
 ## 아니, 디디가 한국어를 알아들어?
 
-디디가 한국어에 응답할 수 있게 소스코드에 `안녕`을 끼워넣어 봅니다. 
+디디가 한국어에 응답할 수 있게 소스코드에 `안녕`을 끼워넣어 봅니다.
 
-{% code-tabs %}
-{% code-tabs-item title="./dd/kittenbot.js" %}
 ```bash
 controller.hears(
   ['hello', 'hi', 'dd', '안녕'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 ## 컨테이너가 좁은 것 같아요
 
 앗! 털뚠뚠이 디디에게 컨테이너가 좀 좁은 것 같습니다. 숨쉴 공간도 없는 것 같아보입니다. 디디는 크건 작건 컨테이너처럼 보이는 것이있으면 모든 컨테이너에 머리를 들이밀고 들어가 보려고 하지요.  
-![./image/dd-fat.png](.gitbook/assets/dd-fat.png)
+
+
+![](.gitbook/assets/dd-fat.png)
 
 몸집이 큰 디디를 위해 클러스터 replica를 2개로 늘려주었습니다.
 
@@ -317,15 +319,32 @@ tt        1         1         1            1           10h
 
 그런데 이렇게 하니까 디디가 두 마리로 복제되었습니다. 어허, 각각의 replica에서 디디가 응답을 하고 있네요. 왜요? 왜요?
 
- ![./image/replica-2.png](.gitbook/assets/replica-2.png)
+![](.gitbook/assets/replica-2.png)
 
 ## 라라는 똑똑하니까
 
 라라는 칠냥이 중에서 제일 똑똑합니다. 크림 히어로즈 [누가 제일 똑똑할까? 고양이 IQ 테스트편 ](https://www.youtube.com/watch?v=jp9liXE_1wc)에서 검증되었지요. 제가 도커나 쿠버네티스 커맨드를 아직 다 못 외워서 맨날 찾아보는데 제 선생님으로 모실까 해요.
 
-![./image/lala-docker-kube.png](.gitbook/assets/lala-docker-kube%20%281%29.png)
+![](.gitbook/assets/lala-docker-kube%20%281%29.png)
 
 [https://botkit.ai](https://botkit.ai)의 설명을 보시면 생각보다 쉽게 추가가 가능한 것을 알 수 있습니다. [./lala/kittenbot.js](https://github.com/goungoun/cream-heros/tree/514ded7965a0af3583976c19d1911c7c88badc35/lala/kittenbot.js)은 controller.hears 로 시작하는 코드블럭을 뒤에 계속 추가하는 구조로 확장하고 있습니다.
+
+## 루루 내 쿠베 왜 훔쳐가냥
+
+라라가 쿠버네티스는 루루한테 물어보래서 루루한테 갔더니 제가 볼 교육방송을 물고 훔쳐가네요.  
+
+
+![](.gitbook/assets/chat-lulu.png)
+
+```javascript
+controller.hears(
+  ['hello', 'hi','lulu'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, 'Meow. 안녕? 난 해적이야. 루루라고 해 :smile_cat:') })
+
+controller.hears(
+  ['kubernetes','kube','쿠베','쿠버네티스'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, 'Terry Cho 동영상은 내가 가져간다~ 데헷 =3 =3 https://www.youtube.com/watch?v=rdyUAduXi48&feature=youtu.be') })
+```
 
 ## 로그 확인하기
 
@@ -352,30 +371,53 @@ Error: Specify $LALA_TOKEN in environment
 
 [조대협님 해커톤 교육방송](https://www.youtube.com/watch?v=rdyUAduXi48) 에서 배운 꿀팁 `imagePullPolicy: Always` 가 고양이를 만드는 템플릿인 [./cat/deploy.yaml](https://github.com/goungoun/cream-heros/tree/439c8a505efdd0854a0100b54af1012e703ccbf2/cat/deploy.yaml)에 적용되어 있어서 다른 냥이들 테스트하는 중에는 문제가 되지 않았는데 말이죠.
 
-나중에 알고 보니 수작업으로 테스트한 이 남아있어서 도커 이미지는 v2로 주고 쿠버네티스에는 v1을 계속 배포했던 것이었습니다.
+나중에 알고 보니 제가 아무 생각 없이 도커 이미지는 태그를 v2로 주고 쿠버네티스에는 v1을 계속 배포하고 있었습니다. :\(
 
 ## 모모는 따라쟁이
 
-모모는 대화중에 받은 답변을 그대로 말하도록 구현해보았습니다. 자꾸 따라해서 화는 나는데 흥칫칫뿡까지 그대로 따라하는 모모냥이네요. 
+모모는 대화중에 받은 답변을 그대로 말하도록 구현해보았습니다. 자꾸 따라해서 화는 나는데 흥칫칫뿡까지 그대로 따라하는 모모냥이네요.
 
-![./image/momo-repeat.png](.gitbook/assets/momo-repeat.png)
+![](.gitbook/assets/momo-repeat.png)
 
-{% code-tabs %}
-{% code-tabs-item title="momo/kittenbot.js" %}
-```text
-      var your_answer = answer.text;
-      convo.say(answer.text);
+```javascript
+var your_answer = answer.text;
+convo.say(answer.text);
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-## 배포하는 방법 3가지
+## 티티는 자꾸 울어요
 
-* rollout
-* canary
-* blue-green
+티티는 자꾸 울어서 TT 캔디로 달래봅니다.  
+
+
+![](.gitbook/assets/tt-candy.png)
+
+## 코코도 놀아주세요
+
+코코도 집사랑 놀고싶어요~ 냐옹~  
+
+
+![](.gitbook/assets/coco-fun.png)
+
+coco/kittenbot.js에 코드를 수정해줍니다.
+
+```javascript
+controller.hears(
+  ['coco','코코'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, '입! :smile_cat:') })
+```
+
+그리고 바로 그 디렉토리에서 [../docker.sh](../docker.sh) [../kubectl.sh](..kubectl.sh)를 실행시켜줍니다. 인자를 넘기지 않으면 소스 파일이 있는 디렉토리명을 인식하여 배포할 수 있도록 셸 스크립트를 수정해놓았습니다.
+
+## 코코와 모모, 티티가 외출하고 싶어해요
+
+코코와 모모에게 외출복을 입혀서 도커 이미지를 새로 만든 뒤 쿠버네티스에 동시에 배포합니다. 잘 될꺼에요.
+
+```bash
+$ ./docker.sh coco momo tt
+$ ./kubectl.sh coco momo tt
+```
 
 ## 정리
 
-귀여운 칠냥이를 키워보면서 쿠버네티스 기본 명령어와 여러가지 상황에 대처하는 약간의 노하우를 공유해보았습니다. 도커가 일곱개가 되다 보니 퀵랩 예제 코드 실행해볼 때하고는 또 다르게 생각하지도 못했던 경험을 하게 되었는데요. 이 글이 실제 서비스에서 쿠버네티스를 운영하실 때 여러가지 이슈를 잘 헤쳐나가는데 작은 도움이 되었으면 합니다. 끝까지 읽어주셔서 감사합니다.
+귀여운 칠냥이와 집사놀이를 하면서 쿠버네티스 기본 명령어와 여러가지 돌발 상황에 대처하는 시간을 가져보았습니다. 도커가 일곱개로 늘어나니까 퀵랩 예제 코드 실행해볼 때하고는 또 다른 느낌이었던 것 같습니다. 이 글이 한 개의 컨테이너를 사용하는 헬로우 월드와 많은 도커 컨테이너를 사용하는 실제 운영과의 갭을 채워주는데에도 작은 도움이 될 수 있었으면 좋겠습니다. 감사합니다.
 
