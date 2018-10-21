@@ -40,8 +40,12 @@ fs.readFile(process.env.LULU_TOKEN_PATH, function (err, data) {
 })
 
 controller.hears(
-  ['hello', 'hi','lulu'], ['direct_message', 'direct_mention', 'mention'],
+  ['hello', 'hi', '루루', '안녕', '안냥'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Meow. 안녕? 난 해적이야. 루루라고 해 :smile_cat:') })
+  
+controller.hears(
+  ['lulu'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, '<@lala> lala') })
   
 controller.hears(
   ['kubernetes','kube','쿠베','쿠버네티스'], ['direct_message', 'direct_mention', 'mention'],

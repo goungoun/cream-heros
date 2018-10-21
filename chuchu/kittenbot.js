@@ -40,5 +40,13 @@ fs.readFile(process.env.CHUCHU_TOKEN_PATH, function (err, data) {
 })
 
 controller.hears(
-  ['hello', 'hi','chuchu'], ['direct_message', 'direct_mention', 'mention'],
+  ['hello', 'hi', '츄츄', '안녕', '안냥'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
+  
+controller.hears(
+  ['chuchu'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) {
+  	bot.reply(message, 'churro :smile_cat:')
+  	bot.reply(message, 'https://storage.googleapis.com/cream-heros/churros.jpg') 
+  	bot.reply(message, '사줘~ 츄릅') 
+  })

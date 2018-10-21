@@ -1,6 +1,10 @@
 #!/bin/bash
 set -x
+
 project=$(gcloud config list project --format 'value(core.project)')
+cluster_name=${project}
+gcloud container clusters get-credentials ${cluster_name} --zone us-central1-a --project ${project}
+
 script=`readlink -f $0`
 path=`dirname ${script}`
 

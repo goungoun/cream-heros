@@ -39,8 +39,18 @@ fs.readFile(process.env.TT_TOKEN_PATH, function (err, data) {
     })
 })
 
+controller.on('conversationStarted', function(bot, convo) {
+  console.log('Meow~~ I am TT ~~', convo.context.user);
+})
+
 controller.hears(
-  ['hello', 'hi','tt'], ['direct_message', 'direct_mention', 'mention'],
+  ['누구','사진','who','photo'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) {
+    bot.reply(message, 'https://storage.googleapis.com/cream-heros/tt.png')
+  })
+
+controller.hears(
+  ['hello', 'hi', 'tt', '티티', '안녕', '안냥'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, 'T.T Meow. :crying_cat_face:') })
 
 

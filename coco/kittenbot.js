@@ -44,6 +44,11 @@ controller.hears(
   function (bot, message) { bot.reply(message, 'Meow. :smile_cat:') })
   
 controller.hears(
-  ['coco','코코'], ['direct_message', 'direct_mention', 'mention'],
+  ['코코'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) { bot.reply(message, '입! :smile_cat:') })
+  
+controller.hears(
+  ['coco'], ['direct_message', 'direct_mention', 'mention'],
+  function (bot, message) { bot.reply(message, 'choco :chocolate_bar:') })
+  
   

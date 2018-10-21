@@ -40,7 +40,7 @@ fs.readFile(process.env.LALA_TOKEN_PATH, function (err, data) {
 })
 
 controller.hears(
-  ['hello', 'hi', 'lala', '라라', '안녕','안냥'], ['direct_message', 'direct_mention', 'mention'],
+  ['hello', 'hi', 'lala', '라라', '안녕', '안냥'], ['direct_message', 'direct_mention', 'mention'],
   function (bot, message) {
     bot.reply(message, 'meow. 왔냥 :smile_cat:')
   })
@@ -60,10 +60,10 @@ controller.hears('docker','direct_mention,direct_message', function(bot, message
       var your_answer = answer.text;
       // do something with this answer!
       // storeTacoType(convo.context.user, taco_type);
-      convo.say('$ gcloud docker -- push gcr.io/cream-heros/lala:v1');
+      convo.say('$ docker push gcr.io/cream-heros/lala:v1');
       convo.say('$ docker run -d \
          -v $(pwd)/secret/:/secret \
-         -e MOMO_TOKEN_PATH=/secret/lala-token \
+         -e LALA_TOKEN_PATH=/secret/lala-token \
          gcr.io/cream-heros/lala:v1');
       convo.say('$ docker ps');
       convo.say('$ docker stop ${CONTAINER ID}');
@@ -72,6 +72,8 @@ controller.hears('docker','direct_mention,direct_message', function(bot, message
     })
   })
 })
+
+
 
 controller.hears('kubernetes','direct_mention,direct_message', function(bot, message) {
 
